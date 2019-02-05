@@ -2,10 +2,9 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>Electron Boilerplate</title>
+  <title>BallRena Launcher | Welcome</title>
 </head>
 <body>
-
   <div id="app" class="container" style="display: none;">
     <h1 id="greet"></h1>
     <p>
@@ -20,8 +19,25 @@
     <p>
       Electron version: <strong id="electron-version"></strong>
     </p>
+    <p id="UUIDText">
+      API UUID: NONE
+    </p>
   </div>
 
   <script src="app.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js"></script>
+<script>
+  var socket = io('https://ballrenatest.glitch.me/');
+  socket.on('connect', function(){
+    console.log("connected!");
+  });
+  socket.on('UUID', function(data) {
+        console.log(data.message);
+       var socketinfo = JSON.parse(data.message)
+        document.getElementById("UUIDText").innerHTML = "UUID:<strong>" + socketinfo.UUID + "</strong><br> SocketID:<strong>" + socketinfo.SocketID + "</strong><br> Online:<strong>" + socketinfo.Online + "</strong>";
+      })
+  socket.on('event', function(data){});
+  socket.on('disconnect', function(){});
+</script>
 </body>
 </html>
