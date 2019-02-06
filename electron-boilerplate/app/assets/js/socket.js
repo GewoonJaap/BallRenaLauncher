@@ -1,4 +1,4 @@
-
+var request = require('request');
 var socket = io('https://ballrenatest.glitch.me/');
 socket.on('connect', function(){
   console.log("Connected to master server!");
@@ -22,6 +22,29 @@ function Login(){
     console.log("Password: " + document.getElementById("password").value);
     console.log("Username: " + document.getElementById("username").value);
     console.log("Logging in..........");
-    socket.emit('login', { message: '{ "username": "' + username + '","password": "' + password + '"}'});
+    
+
+    var options = {
+        method: "GET",
+        url: 'https://auth.ballrena.ml/api/g_userinfo.php?apireqkey=BallRena&func=getloginkey&username=' + username + '&password=' + password,
+        headers: {
+          'User-Agent': 'nodejs request',
+        }
+      }
+
+      request(options, (error, response, body) => {
+          if(!error && response.statusCode == 200){
+              var json = JSON.parse(body)
+              if(json.login == "success"){
+                  console.log("Login: " + json.login)
+                  console.log(json.loginreqkey);
+              }
+              else{
+                  console.log("Login: " + json.login);
+              }
+          }
+      })
+
+
 
 }
