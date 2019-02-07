@@ -1,4 +1,5 @@
 var request = require('request');
+var loginkey;
 var socket = io('https://ballrenatest.glitch.me/');
 socket.on('connect', function(){
   console.log("Connected to master server!");
@@ -41,6 +42,7 @@ function Login()
               if(json.login == "success"){
                   console.log("Login: " + json.login)
                   console.log(json.loginreqkey);
+                  loginkey = json.loginreqkey;
               }
               else{
                   console.log("Login: " + json.login);
@@ -90,6 +92,7 @@ function Register()
               if(json.login == "success"){
                   console.log("Login: " + json.login)
                   console.log(json.loginreqkey);
+                loginkey = json.loginreqkey;
               }
               else{
                   console.log("Login: " + json.login);
