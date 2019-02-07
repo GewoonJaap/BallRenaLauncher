@@ -16,11 +16,14 @@ socket.on('callback', function(data){
     console.log("Success: " + answer.succes);
 })
 
-function Login(){
-    var password = document.getElementById("password").value;
-    var username = document.getElementById("username").value;
-    console.log("Password: " + document.getElementById("password").value);
-    console.log("Username: " + document.getElementById("username").value);
+//Get data using https request || UNSAFE!!!!!!!!!!!!!!!!!!!!!!!!!!!!! But we still use it xD
+
+function Login()
+{
+    var password = document.getElementById("passwordl").value;
+    var username = document.getElementById("usernamel").value;
+    console.log("Password: " + password);
+    console.log("Username: " + username);
     console.log("Logging in..........");
     
 
@@ -46,5 +49,52 @@ function Login(){
       })
 
 
+
+}
+function ToLogin()
+{
+    document.getElementById("loginbox").style.visibility = "visible";
+    document.getElementById("registerbox").style.visibility = "hidden";
+    console.log("Time to login");
+}
+
+function ToRegister()
+{
+    document.getElementById("loginbox").style.visibility = "hidden";
+    document.getElementById("registerbox").style.visibility = "visible";
+    console.log("Time to register");
+}
+
+function Register()
+{
+    var password = document.getElementById("passwordr").value;
+    var username = document.getElementById("usernamer").value;
+    var email = document.getElementById("email").value;
+    console.log("Registering with:");
+    console.log("Email: " + email);
+    console.log("Username: " + username);
+    console.log("Password:" + password);
+
+    var options = {
+        method: "GET",
+        url: 'https://auth.ballrena.ml/interface/register.php?email=' + email + '&password=' + password + '&password2=' + password + '&username=' + username,
+        headers:{
+        'content-type': 'application/x-www-form-urlencoded'
+        },
+        
+      }
+
+      request(options, (error, response, body) => {
+          if(!error && response.statusCode == 200){
+              var json = JSON.parse(body)
+              if(json.login == "success"){
+                  console.log("Login: " + json.login)
+                  console.log(json.loginreqkey);
+              }
+              else{
+                  console.log("Login: " + json.login);
+              }
+          }
+      })
 
 }
