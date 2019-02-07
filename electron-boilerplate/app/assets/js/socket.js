@@ -1,6 +1,14 @@
 var request = require('request');
+var emoji = require('node-emoji')
 var loginkey;
 var socket = io('https://ballrenatest.glitch.me/');
+
+
+//EMOJI
+//https://www.npmjs.com/package/node-emoji
+
+
+
 socket.on('connect', function(){
   console.log("Connected to master server!");
 });
@@ -41,11 +49,14 @@ function Login()
               var json = JSON.parse(body)
               if(json.login == "success"){
                   console.log("Login: " + json.login)
+                  document.getElementById("submit classl").value = "Login" + emoji.get('heavy_check_mark');
                   console.log(json.loginreqkey);
                   loginkey = json.loginreqkey;
               }
               else{
                   console.log("Login: " + json.login);
+                  delay(500);
+                  document.getElementById("submit classl").value = "Login" + emoji.get('x');
               }
           }
       })
@@ -72,6 +83,11 @@ function Register()
     var password = document.getElementById("passwordr").value;
     var username = document.getElementById("usernamer").value;
     var email = document.getElementById("email").value;
+
+    if(password == "" || username == "" || email == ""){
+        document.getElementById("submit classr").value = "Register" + emoji.get('x');
+    }
+    else{
     console.log("Registering with:");
     console.log("Email: " + email);
     console.log("Username: " + username);
@@ -90,14 +106,22 @@ function Register()
           if(!error && response.statusCode == 200){
               var json = JSON.parse(body)
               if(json.login == "success"){
-                  console.log("Login: " + json.login)
+                  console.log("Register: " + json.login)
                   console.log(json.loginreqkey);
                 loginkey = json.loginreqkey;
+                document.getElementById("submit classr").value = "Register" + emoji.get('heavy_check_mark');
               }
               else{
                   console.log("Login: " + json.login);
+                  document.getElementById("submit classr").value = "Register" + emoji.get('x');
               }
           }
       })
+    }
 
 }
+function delay(milisecondDelay) {
+    milisecondDelay += Date.now();
+    while(Date.now() < milisecondDelay){}
+ }
+ 
