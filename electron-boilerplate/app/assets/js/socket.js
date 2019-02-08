@@ -5,6 +5,8 @@ var loginkey;
 var socket = io('https://ballrenatest.glitch.me/');
 
 
+
+
 //EMOJI
 //https://www.npmjs.com/package/node-emoji
 
@@ -53,6 +55,7 @@ function Login()
                   document.getElementById("submit classl").value = "Login" + emoji.get('heavy_check_mark');
                   loggersocket.log(json.loginreqkey);
                   loginkey = json.loginreqkey;
+                  window.location.replace(`file://${__dirname}\home.html`);
               }
               else{
                   loggersocket.warn("Login: " + json.login);
