@@ -1,5 +1,6 @@
 var request = require('request');
-var emoji = require('node-emoji')
+var emoji = require('node-emoji');
+const loggersocket = require('./assets/js/loggerutil.js')('%c[SocketIO]', 'color: #7289da; font-weight: bold');
 var loginkey;
 var socket = io('https://ballrenatest.glitch.me/');
 
@@ -10,19 +11,19 @@ var socket = io('https://ballrenatest.glitch.me/');
 
 
 socket.on('connect', function(){
-  console.log("Connected to master server!");
+  loggersocket.log("Connected to master server!");
 });
 socket.on('UUID', function(data) {
-      console.log(data.message);
+      loggersocket.log(data.message);
      var socketinfo = JSON.parse(data.message)
     })
 socket.on('event', function(data){});
 socket.on('disconnect', function(){
-    console.log("Connection lost! Trying to reconnect....")
+    loggersocket.log("Connection lost! Trying to reconnect....");
 });
 socket.on('callback', function(data){
     var answer = JSON.parse(data.message);
-    console.log("Success: " + answer.succes);
+    loggersocket.log("Success: " + answer.succes);
 })
 
 //Get data using https request || UNSAFE!!!!!!!!!!!!!!!!!!!!!!!!!!!!! But we still use it xD
@@ -31,9 +32,9 @@ function Login()
 {
     var password = document.getElementById("passwordl").value;
     var username = document.getElementById("usernamel").value;
-    console.log("Password: " + password);
-    console.log("Username: " + username);
-    console.log("Logging in..........");
+    loggersocket.log("Password: " + password);
+    loggersocket.log("Username: " + username);
+    loggersocket.log("Logging in..........");
     
 
     var options = {
@@ -48,13 +49,13 @@ function Login()
           if(!error && response.statusCode == 200){
               var json = JSON.parse(body)
               if(json.login == "success"){
-                  console.log("Login: " + json.login)
+                  loggersocket.log("Login: " + json.login)
                   document.getElementById("submit classl").value = "Login" + emoji.get('heavy_check_mark');
-                  console.log(json.loginreqkey);
+                  loggersocket.log(json.loginreqkey);
                   loginkey = json.loginreqkey;
               }
               else{
-                  console.log("Login: " + json.login);
+                  loggersocket.warn("Login: " + json.login);
                   delay(500);
                   document.getElementById("submit classl").value = "Login" + emoji.get('x');
               }
@@ -68,14 +69,14 @@ function ToLogin()
 {
     document.getElementById("loginbox").style.visibility = "visible";
     document.getElementById("registerbox").style.visibility = "hidden";
-    console.log("Time to login");
+    loggersocket.log("Time to login");
 }
 
 function ToRegister()
 {
     document.getElementById("loginbox").style.visibility = "hidden";
     document.getElementById("registerbox").style.visibility = "visible";
-    console.log("Time to register");
+    loggersocket.log("Time to register");
 }
 
 function Register()
@@ -88,10 +89,10 @@ function Register()
         document.getElementById("submit classr").value = "Register" + emoji.get('x');
     }
     else{
-    console.log("Registering with:");
-    console.log("Email: " + email);
-    console.log("Username: " + username);
-    console.log("Password:" + password);
+    loggersocket.log("Registering with:");
+    loggersocket.log("Email: " + email);
+    loggersocket.log("Username: " + username);
+    loggersocket.log("Password:" + password);
 
     var options = {
         method: "GET",
@@ -106,13 +107,13 @@ function Register()
           if(!error && response.statusCode == 200){
               var json = JSON.parse(body)
               if(json.login == "success"){
-                  console.log("Register: " + json.login)
-                  console.log(json.loginreqkey);
+                  loggersocket.log("Register: " + json.login)
+                  loggersocket.log(json.loginreqkey);
                 loginkey = json.loginreqkey;
                 document.getElementById("submit classr").value = "Register" + emoji.get('heavy_check_mark');
               }
               else{
-                  console.log("Login: " + json.login);
+                  loggersocket.debug("Login: " + json.login);
                   document.getElementById("submit classr").value = "Register" + emoji.get('x');
               }
           }
