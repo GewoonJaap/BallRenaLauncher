@@ -2,7 +2,11 @@ var request = require('request');
 const electron = require('electron');
 var emoji = require('node-emoji');
 const loggersocket = require('./assets/js/loggerutil.js')('%c[SocketIO]', 'color: #7289da; font-weight: bold');
+
+//Var
 var loginkey;
+var username;
+var password;
 const fs = require('fs');
 let config = fs.readFileSync('./app/assets/config/config.json');  
 var configjson = JSON.parse(config);
@@ -32,21 +36,74 @@ socket.on('callback', function(data){
     loggersocket.log("Success: " + answer.succes);
 })
 
-if(store.get('unicorn') != undefined){
-    let win = new BrowserWindow({minWidth: 1280, minHeight: 720, width: 1280, height: 720, frame: false, titleBarStyle: 'hiddenInset', webPreferences: {devTools: true }, backgroundColor: '#2e2c29' , title:"BallRena Launcher" })
-    loggersocket.log("Keyfound!");
-    win.loadURL(`file://${__dirname}/home.html`);
-    //Close windows
-    var window = remote.getCurrentWindow();
-    window.close(); 
+if(store.get('unicorn.username') != undefined && store.get('unicorn.password') != undefined)
+{
+    LoginSaved();
+}
+
+function SaveUserPass(){
+    store.set('unicorn.username', username);
+    store.set('unicorn.password', password);
+    console.log(store.get('unicorn.username'));
+}
+
+function SaveLoginkey(){
+    store.set('unicorn.loginkey', loginkey);
+    console.log(store.get('unicorn.loginkey'));
 }
 
 //Get data using https request || UNSAFE!!!!!!!!!!!!!!!!!!!!!!!!!!!!! But we still use it xD
 
-function Login()
+function LoginBTN()
 {
     var password = document.getElementById("passwordl").value;
     var username = document.getElementById("usernamel").value;
+    loggersocket.log("Password: " + password);
+    loggersocket.log("Username: " + username);
+    loggersocket.log("Logging in..........");
+    SaveUserPass();
+    
+
+    var options = {
+        method: "GET",
+        url: 'https://auth.ballrena.ml/api/g_userinfo.php?apireqkey=BallRena&func=getloginkey&username=' + username + '&password=' + password,
+        headers: {
+          'User-Agent': 'nodejs request',
+        }
+      }
+
+      request(options, (error, response, body) => {
+          if(!error && response.statusCode == 200){
+              var json = JSON.parse(body)
+              if(json.login == "success"){
+                  loggersocket.log("Login: " + json.login)
+                  document.getElementById("submit classl").value = "Login" + emoji.get('heavy_check_mark');
+                  loggersocket.log(json.loginreqkey);
+                  loginkey = json.loginreqkey;
+                  SaveLoginKey();
+                  loggersocket.log("Opening main menu....");
+                  let win = new BrowserWindow({minWidth: 1280, minHeight: 720, width: 1280, height: 720, frame: false, titleBarStyle: 'hiddenInset', webPreferences: {devTools: true }, backgroundColor: '#2e2c29' , title:"BallRena Launcher" })
+                  loggersocket.log("Opening...");
+                  win.loadURL(`file://${__dirname}/home.html`);
+                  //Close windows
+                  var window = remote.getCurrentWindow();
+                  window.close();
+              }
+              else{
+                  loggersocket.warn("Login: " + json.login);
+                  delay(500);
+                  document.getElementById("submit classl").value = "Login" + emoji.get('x');
+              }
+          }
+      })
+
+
+
+}
+function LoginSaved()
+{
+    var password = store.get('unicorn.password');
+    var username = store.get('unicorn.username');
     loggersocket.log("Password: " + password);
     loggersocket.log("Username: " + username);
     loggersocket.log("Logging in..........");
@@ -68,8 +125,7 @@ function Login()
                   document.getElementById("submit classl").value = "Login" + emoji.get('heavy_check_mark');
                   loggersocket.log(json.loginreqkey);
                   loginkey = json.loginreqkey;
-                  store.set('unicorn', loginkey);
-                  console.log(store.get('unicorn'));
+                  SaveLoginKey();
                   loggersocket.log("Opening main menu....");
                   let win = new BrowserWindow({minWidth: 1280, minHeight: 720, width: 1280, height: 720, frame: false, titleBarStyle: 'hiddenInset', webPreferences: {devTools: true }, backgroundColor: '#2e2c29' , title:"BallRena Launcher" })
                   loggersocket.log("Opening...");
@@ -108,6 +164,7 @@ function Register()
     var password = document.getElementById("passwordr").value;
     var username = document.getElementById("usernamer").value;
     var email = document.getElementById("email").value;
+    SaveUserPass();
 
     if(password == "" || username == "" || email == ""){
         document.getElementById("submit classr").value = "Register" + emoji.get('x');
@@ -134,8 +191,7 @@ function Register()
                   loggersocket.log("Register: " + json.login)
                   loggersocket.log(json.loginreqkey);
                 loginkey = json.loginreqkey;
-                store.set('unicorn', loginkey);
-                console.log(store.get('unicorn'));
+                SaveLoginKey();
                 document.getElementById("submit classr").value = "Register" + emoji.get('heavy_check_mark');
                 loggersocket.log("Opening main menu....");
                 let win = new BrowserWindow({minWidth: 1280, minHeight: 720, width: 1280, height: 720, frame: false, titleBarStyle: 'hiddenInset', backgroundColor: '#2e2c29' , title:"BallRena Launcher" })
