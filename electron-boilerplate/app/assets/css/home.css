@@ -11,6 +11,15 @@ body {
 
 }
 
+input[type="submit"],
+input[type="reset"],
+input[type="button"],
+input[type="text"],
+button,
+textarea {
+	-webkit-app-region: no-drag;
+}
+
 #header{
     height: 60vh;
     background-image: url(../img/MainMenuHeaderBG_HD.jpg);
