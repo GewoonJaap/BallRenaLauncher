@@ -1,8 +1,13 @@
 var request = require('request');
+const electron = require('electron');
 var emoji = require('node-emoji');
 const loggersocket = require('./assets/js/loggerutil.js')('%c[SocketIO]', 'color: #7289da; font-weight: bold');
 var loginkey;
-var socket = io('https://ballrenatest.glitch.me/');
+const fs = require('fs');
+let config = fs.readFileSync('./app/assets/config/config.json');  
+var configjson = JSON.parse(config);
+var socket = io(configjson.SocketURL);
+const BrowserWindow = electron.remote.BrowserWindow;
 
 
 
@@ -55,7 +60,13 @@ function Login()
                   document.getElementById("submit classl").value = "Login" + emoji.get('heavy_check_mark');
                   loggersocket.log(json.loginreqkey);
                   loginkey = json.loginreqkey;
-                  window.location.replace(`file://${__dirname}\home.html`);
+                  loggersocket.log("Opening main menu....");
+                  let win = new BrowserWindow({ titleBarStyle: 'default', minWidth: 1280, minHeight: 720, width: 1280, height: 720, frame: false, backgroundColor: '#2e2c29' , title:"BallRena Launcher" })
+                  loggersocket.log("Opening...");
+                  win.loadURL(`file://${__dirname}/home.html`);
+                  //Close windows
+                  var window = remote.getCurrentWindow();
+                  window.close();
               }
               else{
                   loggersocket.warn("Login: " + json.login);
@@ -114,6 +125,13 @@ function Register()
                   loggersocket.log(json.loginreqkey);
                 loginkey = json.loginreqkey;
                 document.getElementById("submit classr").value = "Register" + emoji.get('heavy_check_mark');
+                loggersocket.log("Opening main menu....");
+                let win = new BrowserWindow({ titleBarStyle: 'default', width: 800, height: 600, frame: false, backgroundColor: '#2e2c29' , title:"BallRena Launcher" })
+                loggersocket.log("Opening...");
+                win.loadURL(`file://${__dirname}/home.html`);
+                //Close windows
+                var window = remote.getCurrentWindow();
+                window.close();
               }
               else{
                   loggersocket.debug("Login: " + json.login);

@@ -1,0 +1,30 @@
+body {
+    background-image: url(../img/MainMenuBG_HD.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    margin: 0;
+    padding: 0;
+
+}
+
+#header{
+    height: 50vh;
+    background-image: url(../img/MainMenuHeaderBG_HD.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    background-position: center;
+    font-family: 'Varela Round', sans-serif;
+    font-size: 40px;
+    text-align: center;
+}
+
+#BallRenaText{
+    font-size: 100px;
+    top: 40%;
+    position: relative;
+    color:white;
+    text-shadow: 4px 4px 0px grey;
+    font-weight: bold;
+}

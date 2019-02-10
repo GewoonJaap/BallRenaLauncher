@@ -32,6 +32,7 @@
   },
   "dependencies": {
     "discord-rpc": "^3.0.1",
+    "fs": "0.0.1-security",
     "fs-jetpack": "^2.1.0",
     "node-emoji": "^1.8.1",
     "request": "^2.88.0",
