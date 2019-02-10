@@ -9,7 +9,7 @@ body {
 }
 
 #header{
-    height: 50vh;
+    height: 60vh;
     background-image: url(../img/MainMenuHeaderBG_HD.jpg);
     background-repeat: no-repeat;
     background-size: cover;
@@ -22,9 +22,45 @@ body {
 
 #BallRenaText{
     font-size: 100px;
-    top: 40%;
+    top: 30%;
     position: relative;
     color:white;
     text-shadow: 4px 4px 0px grey;
+    font-weight: bold;
+}
+
+#DownloadButton{
+    background-color: #F5CA23;
+    font-family: 'Varela Round', sans-serif;
+    border: none;
+    color: white;
+    border-radius: 3px;
+    padding: 15px 60px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 18px;
+    margin-top: 10vh;
+}
+
+#DownloadButton:hover{
+    background-color: #BA971B;
+    border-radius: 6px;
+}
+
+#InformationAbout{
+    background-color: #EFF4F6;
+    text-align: left;
+    min-height: 40vh;
+}
+#InformationAboutText{
+    margin-left: 5%;
+    font-family: 'Ubuntu', sans-serif;
+    font-size: 18px;
+    margin-top: 30vh;
+    padding-top: 10vh;
+}
+#HeadTextInfo{
+    font-size: 30px;
     font-weight: bold;
 }
