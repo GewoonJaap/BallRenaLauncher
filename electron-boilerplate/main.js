@@ -7,7 +7,7 @@ if (require.main !== module) {
   
   const path = require('path')
   const glob = require('glob')
-  const {app, BrowserWindow} = require('electron')
+  const {app, BrowserWindow, remote, ipcRenderer} = require('electron')
   
   const debug = /--debug/.test(process.argv[2])
   
@@ -25,6 +25,7 @@ if (require.main !== module) {
         width: 1080,
         minWidth: 680,
         height: 840,
+        titleBarStyle: 'hidden',
         title: app.getName()
       }
   
