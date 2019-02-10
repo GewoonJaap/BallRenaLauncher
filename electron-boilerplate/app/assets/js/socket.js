@@ -15,6 +15,7 @@ const BrowserWindow = electron.remote.BrowserWindow;
 const Store = require('electron-store');
 const store = new Store();
 
+
 //EMOJI
 //https://www.npmjs.com/package/node-emoji
 
@@ -35,29 +36,33 @@ socket.on('callback', function(data){
     var answer = JSON.parse(data.message);
     loggersocket.log("Success: " + answer.succes);
 })
-
-if(store.get('unicorn.username') != undefined && store.get('unicorn.password') != undefined)
-{
-    LoginSaved();
-}
-
 function SaveUserPass(){
     store.set('unicorn.username', username);
     store.set('unicorn.password', password);
     console.log(store.get('unicorn.username'));
 }
 
-function SaveLoginkey(){
-    store.set('unicorn.loginkey', loginkey);
+function SaveLoginKey(key){
+    loggersocket.log("Saving login key...");
+    store.set('unicorn.loginkey', key);
     console.log(store.get('unicorn.loginkey'));
 }
+
+if(store.get('unicorn.username') != undefined && store.get('unicorn.password') != undefined)
+{
+    LoginSaved();
+}
+
+
 
 //Get data using https request || UNSAFE!!!!!!!!!!!!!!!!!!!!!!!!!!!!! But we still use it xD
 
 function LoginBTN()
 {
-    var password = document.getElementById("passwordl").value;
-    var username = document.getElementById("usernamel").value;
+    store.delete('unicorn.username');
+    store.delete('unicorn.password');
+    password = document.getElementById("passwordl").value;
+    username = document.getElementById("usernamel").value;
     loggersocket.log("Password: " + password);
     loggersocket.log("Username: " + username);
     loggersocket.log("Logging in..........");
@@ -80,7 +85,7 @@ function LoginBTN()
                   document.getElementById("submit classl").value = "Login" + emoji.get('heavy_check_mark');
                   loggersocket.log(json.loginreqkey);
                   loginkey = json.loginreqkey;
-                  SaveLoginKey();
+                  SaveLoginkey();
                   loggersocket.log("Opening main menu....");
                   let win = new BrowserWindow({minWidth: 1280, minHeight: 720, width: 1280, height: 720, frame: false, titleBarStyle: 'hiddenInset', webPreferences: {devTools: true }, backgroundColor: '#2e2c29' , title:"BallRena Launcher" })
                   loggersocket.log("Opening...");
@@ -102,8 +107,8 @@ function LoginBTN()
 }
 function LoginSaved()
 {
-    var password = store.get('unicorn.password');
-    var username = store.get('unicorn.username');
+    password = store.get('unicorn.password');
+    username = store.get('unicorn.username');
     loggersocket.log("Password: " + password);
     loggersocket.log("Username: " + username);
     loggersocket.log("Logging in..........");
@@ -125,13 +130,13 @@ function LoginSaved()
                   document.getElementById("submit classl").value = "Login" + emoji.get('heavy_check_mark');
                   loggersocket.log(json.loginreqkey);
                   loginkey = json.loginreqkey;
-                  SaveLoginKey();
+                  SaveLoginKey(loginkey);
                   loggersocket.log("Opening main menu....");
                   let win = new BrowserWindow({minWidth: 1280, minHeight: 720, width: 1280, height: 720, frame: false, titleBarStyle: 'hiddenInset', webPreferences: {devTools: true }, backgroundColor: '#2e2c29' , title:"BallRena Launcher" })
                   loggersocket.log("Opening...");
                   win.loadURL(`file://${__dirname}/home.html`);
                   //Close windows
-                  var window = remote.getCurrentWindow();
+                  var window = electron.remote.getCurrentWindow();
                   window.close();
               }
               else{
@@ -161,8 +166,10 @@ function ToRegister()
 
 function Register()
 {
-    var password = document.getElementById("passwordr").value;
-    var username = document.getElementById("usernamer").value;
+    store.delete('unicorn.username');
+    store.delete('unicorn.password');
+    password = document.getElementById("passwordr").value;
+    username = document.getElementById("usernamer").value;
     var email = document.getElementById("email").value;
     SaveUserPass();
 

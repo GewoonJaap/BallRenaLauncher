@@ -8,6 +8,9 @@ body {
     user-select: none;
 }
 
+#WelcomeName{
+    font-size: 20px;
+}
 
 #header{
     height: 60vh;
