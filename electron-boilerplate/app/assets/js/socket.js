@@ -10,8 +10,6 @@ var socket = io(configjson.SocketURL);
 const BrowserWindow = electron.remote.BrowserWindow;
 
 
-
-
 //EMOJI
 //https://www.npmjs.com/package/node-emoji
 
@@ -61,7 +59,7 @@ function Login()
                   loggersocket.log(json.loginreqkey);
                   loginkey = json.loginreqkey;
                   loggersocket.log("Opening main menu....");
-                  let win = new BrowserWindow({minWidth: 1280, minHeight: 720, width: 1280, height: 720, frame: false, titleBarStyle: 'hiddenInset', backgroundColor: '#2e2c29' , title:"BallRena Launcher" })
+                  let win = new BrowserWindow({minWidth: 1280, minHeight: 720, width: 1280, height: 720, frame: false, titleBarStyle: 'hiddenInset', webPreferences: {devTools: true }, backgroundColor: '#2e2c29' , title:"BallRena Launcher" })
                   loggersocket.log("Opening...");
                   win.loadURL(`file://${__dirname}/home.html`);
                   //Close windows

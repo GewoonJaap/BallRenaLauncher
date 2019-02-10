@@ -1,15 +1,32 @@
 <html>
     <head>
             <link rel="stylesheet" href="./assets/css/home.css">   
+            <link rel="stylesheet" href="./assets/css/menubar.css">  
             <link href="https://fonts.googleapis.com/css?family=Varela+Round" rel="stylesheet">
             <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
             <link type="text/css" href="./assets/css/OverlayScrollbars.css" rel="stylesheet"/>
             <script type="text/javascript" src="./assets/js/OverlayScrollbars.js"></script>
             <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
-            
+            <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">  
             <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     </head>
     <body>
+        <div class="title-bar">
+            <div class="window-controls-container">
+              <button 
+                id="minimize-button"
+                class="minimize-button"
+              ><i class="material-icons">remove</i></button>
+              <button 
+                id="min-max-button"
+                class="min-max-button"
+              ><i class="material-icons">fullscreen</i></button>
+              <button 
+                id="close-button"
+                class="close-button"
+              ><i class="material-icons">close</i></button>
+            </div>
+          </div>
 <div></div>
 
         <section id="header">
@@ -53,9 +70,9 @@
     </body>
 
     <script>
- //     document.addEventListener("DOMContentLoaded", function() {
- //       OverlayScrollbars(document.querySelectorAll('body'), { });
-  //      OverlayScrollbars(document.getElementById(id), { className : "os-theme-dark" }); 
- //     })
+      document.addEventListener("DOMContentLoaded", function() {
+       OverlayScrollbars(document.querySelectorAll('body'), { });
+       OverlayScrollbars(document.getElementById(id), { className : "os-theme-dark" }); 
+      })
     </script>
 </html>

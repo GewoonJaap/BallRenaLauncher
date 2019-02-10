@@ -1,5 +1,4 @@
-const {ipcRenderer, remote, shell, webFrame} = require('electron')
-const{app, dialog} = require('electron')
+const {ipcRenderer, remote, shell, webFrame, dialog} = require('electron')
 const path = require('path')
 const loggercore = require('./assets/js/loggerutil.js')('%c[Core]', 'color: #7289da; font-weight: bold');
 
@@ -17,7 +16,19 @@ if(process.defaultApp){
         app.setAsDefaultProtocolClient('BallRenaLauncher')
     }
 }
+document.getElementById('minimize-button').addEventListener('click', () => {
+  remote.getCurrentWindow().minimize()
+})
 
-//app.on('open-url', (event, url) => {
-  //  console.log("Worked")
-//})
+document.getElementById('min-max-button').addEventListener('click', () => {
+  const currentWindow = remote.getCurrentWindow()
+  if(currentWindow.isMaximized()) {
+    currentWindow.unmaximize()
+  } else {
+    currentWindow.maximize()
+  }
+})
+
+document.getElementById('close-button').addEventListener('click', () => {
+  remote.app.quit()
+})

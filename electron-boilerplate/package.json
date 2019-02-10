@@ -32,14 +32,17 @@
     "release2": "electron-builder"
   },
   "dependencies": {
+    "electron-log": "^3.0.1",
     "electron-titlebar-windows": "^3.0.0",
     "fs": "0.0.1-security",
     "fs-jetpack": "^2.1.0",
+    "jquery": "^3.3.1",
     "node-emoji": "^1.8.1",
     "open": "0.0.5",
     "request": "^2.88.0",
     "socket.io": "^2.2.0",
     "socket.io-client": "^2.2.0",
+    "update-electron-app": "^1.3.0",
     "xel": "0.0.193"
   },
   "devDependencies": {
