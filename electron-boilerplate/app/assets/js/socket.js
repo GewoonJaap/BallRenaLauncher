@@ -8,7 +8,8 @@ let config = fs.readFileSync('./app/assets/config/config.json');
 var configjson = JSON.parse(config);
 var socket = io(configjson.SocketURL);
 const BrowserWindow = electron.remote.BrowserWindow;
-
+const Store = require('electron-store');
+const store = new Store();
 
 //EMOJI
 //https://www.npmjs.com/package/node-emoji
@@ -30,6 +31,15 @@ socket.on('callback', function(data){
     var answer = JSON.parse(data.message);
     loggersocket.log("Success: " + answer.succes);
 })
+
+if(store.get('unicorn') != undefined){
+    let win = new BrowserWindow({minWidth: 1280, minHeight: 720, width: 1280, height: 720, frame: false, titleBarStyle: 'hiddenInset', webPreferences: {devTools: true }, backgroundColor: '#2e2c29' , title:"BallRena Launcher" })
+    loggersocket.log("Keyfound!");
+    win.loadURL(`file://${__dirname}/home.html`);
+    //Close windows
+    var window = remote.getCurrentWindow();
+    window.close(); 
+}
 
 //Get data using https request || UNSAFE!!!!!!!!!!!!!!!!!!!!!!!!!!!!! But we still use it xD
 
@@ -58,6 +68,8 @@ function Login()
                   document.getElementById("submit classl").value = "Login" + emoji.get('heavy_check_mark');
                   loggersocket.log(json.loginreqkey);
                   loginkey = json.loginreqkey;
+                  store.set('unicorn', loginkey);
+                  console.log(store.get('unicorn'));
                   loggersocket.log("Opening main menu....");
                   let win = new BrowserWindow({minWidth: 1280, minHeight: 720, width: 1280, height: 720, frame: false, titleBarStyle: 'hiddenInset', webPreferences: {devTools: true }, backgroundColor: '#2e2c29' , title:"BallRena Launcher" })
                   loggersocket.log("Opening...");
@@ -122,6 +134,8 @@ function Register()
                   loggersocket.log("Register: " + json.login)
                   loggersocket.log(json.loginreqkey);
                 loginkey = json.loginreqkey;
+                store.set('unicorn', loginkey);
+                console.log(store.get('unicorn'));
                 document.getElementById("submit classr").value = "Register" + emoji.get('heavy_check_mark');
                 loggersocket.log("Opening main menu....");
                 let win = new BrowserWindow({minWidth: 1280, minHeight: 720, width: 1280, height: 720, frame: false, titleBarStyle: 'hiddenInset', backgroundColor: '#2e2c29' , title:"BallRena Launcher" })
