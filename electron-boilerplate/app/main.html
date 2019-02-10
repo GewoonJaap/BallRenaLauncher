@@ -9,6 +9,7 @@ Launching..................
     let win = new BrowserWindow({ titleBarStyle: 'default', width: 800, height: 600, frame: false, backgroundColor: '#2e2c29' , title:"BallRena Launcher | Login" })
     loggermain.log("Booting up.....");
     win.loadURL(`file://${__dirname}/login.html`);
+    win.webContents.openDevTools()
     //Close windows
     var window = remote.getCurrentWindow();
     window.close();
