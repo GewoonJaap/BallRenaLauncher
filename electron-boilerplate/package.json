@@ -32,7 +32,6 @@
     "release2": "electron-builder"
   },
   "dependencies": {
-    "discord-rpc": "^3.0.1",
     "electron-titlebar-windows": "^3.0.0",
     "fs": "0.0.1-security",
     "fs-jetpack": "^2.1.0",
