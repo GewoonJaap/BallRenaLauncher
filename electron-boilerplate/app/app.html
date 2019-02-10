@@ -1,45 +1,5 @@
-<!doctype html>
-<html>
-<head>
-  <meta charset="utf-8">
-  <title>BallRena Launcher | Welcome</title>
-</head>
-<body>
-  <div id="app" class="container" style="display: none;">
-    <h1 id="greet"></h1>
-    <p>
-      Welcome to <a href="http://electron.atom.io" class="js-external-link">Electron</a> app running on this <strong id="os"></strong> machine.
-    </p>
-    <p>
-      App author: <strong id="author"></strong>
-    </p>
-    <p>
-      Environment: <strong id="env"></strong>
-    </p>
-    <p>
-      Electron version: <strong id="electron-version"></strong>
-      <a href="./login.html">Login</a>
-    </p>
-    <p id="UUIDText">
-      API UUID: NONE
-    </p>
-  </div>
+Launching..................
 
-  <script src="app.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js"></script>
-<script>
-  var socket = io('https://ballrenatest.glitch.me/');
-  socket.on('connect', function(){
-    console.log("connected!");
-  });
-  socket.on('UUID', function(data) {
-        console.log(data.message);
-       var socketinfo = JSON.parse(data.message)
-        document.getElementById("UUIDText").innerHTML = "UUID:<strong>" + socketinfo.UUID + "</strong><br> SocketID:<strong>" + socketinfo.SocketID + "</strong><br> Online:<strong>" + socketinfo.Online + "</strong>";
-      })
-  socket.on('event', function(data){});
-  socket.on('disconnect', function(){});
-</script>
 <script src="./assets/js/core.js"></script>
 <script>
     const electron = require('electron');
@@ -53,5 +13,3 @@
     var window = remote.getCurrentWindow();
     window.close();
     </script>
-</body>
-</html>

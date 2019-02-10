@@ -7,7 +7,7 @@
   "author": "BallRena",
   "copyright": "© 2019, BallRena",
   "homepage": "https://www.ballrena.ml",
-  "main": "app/background.js",
+  "main": "app/main.js",
   "build": {
     "appId": "nl.ballrena.electronjslauncher",
     "files": [

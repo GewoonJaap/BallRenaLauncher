@@ -126,7 +126,7 @@ function Register()
                 loginkey = json.loginreqkey;
                 document.getElementById("submit classr").value = "Register" + emoji.get('heavy_check_mark');
                 loggersocket.log("Opening main menu....");
-                let win = new BrowserWindow({minWidth: 1280, minHeight: 720, width: 1280, height: 720, frame: false, titleBarStyle: 'hiddenInset' backgroundColor: '#2e2c29' , title:"BallRena Launcher" })
+                let win = new BrowserWindow({minWidth: 1280, minHeight: 720, width: 1280, height: 720, frame: false, titleBarStyle: 'hiddenInset', backgroundColor: '#2e2c29' , title:"BallRena Launcher" })
                 loggersocket.log("Opening...");
                 win.loadURL(`file://${__dirname}/home.html`);
                 //Close windows
