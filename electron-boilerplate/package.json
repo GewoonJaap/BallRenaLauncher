@@ -28,10 +28,12 @@
     "e2e": "mocha temp/e2e.js --require source-map-support/register",
     "test": "npm run unit && npm run e2e",
     "start": "node build/start.js",
-    "release": "npm test && webpack --config=build/webpack.app.config.js --env=production && electron-builder"
+    "release": "npm test && webpack --config=build/webpack.app.config.js --env=production && electron-builder",
+    "release2": "electron-builder"
   },
   "dependencies": {
     "discord-rpc": "^3.0.1",
+    "electron-titlebar-windows": "^3.0.0",
     "fs": "0.0.1-security",
     "fs-jetpack": "^2.1.0",
     "node-emoji": "^1.8.1",
