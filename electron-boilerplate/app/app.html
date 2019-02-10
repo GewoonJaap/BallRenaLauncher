@@ -40,5 +40,18 @@
   socket.on('event', function(data){});
   socket.on('disconnect', function(){});
 </script>
+<script src="./assets/js/core.js"></script>
+<script>
+    const electron = require('electron');
+    const loggermain = require('./assets/js/loggerutil.js')('%c[Main]', 'color: #7289da; font-weight: bold');
+    //Open login screen
+    const BrowserWindow = electron.remote.BrowserWindow;
+    let win = new BrowserWindow({ titleBarStyle: 'default', width: 800, height: 600, frame: false, backgroundColor: '#2e2c29' , title:"BallRena Launcher | Login" })
+    loggermain.log("Booting up.....");
+    win.loadURL(`file://${__dirname}/login.html`);
+    //Close windows
+    var window = remote.getCurrentWindow();
+    window.close();
+    </script>
 </body>
 </html>
