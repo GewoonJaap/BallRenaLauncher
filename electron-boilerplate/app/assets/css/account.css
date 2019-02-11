@@ -3,6 +3,7 @@ body{
     margin: 0;
     user-select: none;
     overflow: hidden;
+    font-family: 'Ubuntu', sans-serif;
 }
 
 #spacer{
@@ -10,12 +11,46 @@ body{
 }
 
 .settingslist{
-    background-color: grey;
-    padding-left: 15vh;
-    height: 100vh;
+    background-color: rgb(79, 83, 92);
+    text-align: center;
+    padding-left: 30vh;
+    height: 100%;
     margin-right: 70%;
     padding-top: 10vh;
-    overflow: hidden;
-    position: static;
+    overflow-y: auto;
+    padding-bottom: 10vh;
     z-index: 1;
+    font-size: 25px;
+    list-style-type: none;
+    border-radius: 2px;
+    color: rgb(43, 18, 35);
 }
+
+li:active{
+    margin-right: 5vh;
+    border-radius: 5px;
+    background-color: rgb(255, 254, 168);
+    border-bottom: 3px solid red;
+    padding-bottom:5px;
+    color: rgb(43, 18, 35);
+}
+
+li:hover{
+    margin-right: 5vh;
+    border-radius: 5px;
+    background-color: #3D3F43;
+    border-bottom: 3px solid red;
+    padding-bottom:5px;
+    color: yellow;
+}
+
+li{
+    margin-right: 5vh;
+    border-radius: 5px;
+    background-color: #3D3F43;
+    border-bottom: 3px solid rgb(112, 73, 252);
+    padding-bottom:5px;
+    color: yellow;
+}
+
+
