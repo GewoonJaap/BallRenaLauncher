@@ -1,9 +1,7 @@
 var request = require('request');
 const loggerbackend = require('./assets/js/loggerutil.js')('%c[Backend]', 'color: #7289da; font-weight: bold');
 const fs = require('fs');
-let config = fs.readFileSync('./app/assets/config/config.json');  
-var configjson = JSON.parse(config);
-var socket = io(configjson.SocketURL);
+var socket = io('https://ballrena-node-backend.herokuapp.com');
 
 socket.on('connect', function(){
     loggerbackend.log("Connected to master server!");

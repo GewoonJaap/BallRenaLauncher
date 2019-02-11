@@ -1,6 +1,7 @@
 var request = require('request');
 const electron = require('electron');
 var emoji = require('node-emoji');
+console.log(__dirname)
 const loggersocket = require('./assets/js/loggerutil.js')('%c[SocketIO]', 'color: #7289da; font-weight: bold');
 
 //Var
@@ -8,9 +9,7 @@ var loginkey;
 var username;
 var password;
 const fs = require('fs');
-let config = fs.readFileSync('./app/assets/config/config.json');  
-var configjson = JSON.parse(config);
-var socket = io(configjson.SocketURL);
+var socket = io('https://ballrena-node-backend.herokuapp.com');
 const BrowserWindow = electron.remote.BrowserWindow;
 const Store = require('electron-store');
 const store = new Store();
