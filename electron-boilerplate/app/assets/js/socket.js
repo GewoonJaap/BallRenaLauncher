@@ -111,6 +111,7 @@ function LoginSaved()
     loggersocket.log("Password: " + password);
     loggersocket.log("Username: " + username);
     loggersocket.log("Logging in..........");
+    document.getElementById("submit classl").value = "Logging as: " + username;
     
 
     var options = {

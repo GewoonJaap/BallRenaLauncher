@@ -1,6 +1,6 @@
 Launching..................
 
-<script src="./assets/js/core.js"></script>
+
 <script>
     const electron = require('electron');
     const loggermain = require('./assets/js/loggerutil.js')('%c[Main]', 'color: #7289da; font-weight: bold');
@@ -11,6 +11,6 @@ Launching..................
     win.loadURL(`file://${__dirname}/login.html`);
     win.webContents.openDevTools()
     //Close windows
-    var window = remote.getCurrentWindow();
+    var window = electron.remote.getCurrentWindow();
     window.close();
     </script>

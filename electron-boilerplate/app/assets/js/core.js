@@ -1,6 +1,8 @@
-const {ipcRenderer, remote, shell, webFrame, dialog} = require('electron')
+const {ipcRenderer, remote, shell, webFrame, dialog, electron} = require('electron')
 const path = require('path')
 const loggercore = require('./assets/js/loggerutil.js')('%c[Core]', 'color: #7289da; font-weight: bold');
+const Storecore = require('electron-store');
+const storecore = new Storecore();
 
 
 //Program info log!
@@ -23,6 +25,29 @@ if(process.defaultApp){
     }
 }
 document.getElementById('minimize-button').addEventListener('click', () => {
+  MyAccount();
+})
+document.getElementById('logout-button').addEventListener('click', () => {
+LogOut();
+})
+
+function MyAccount(){
+  loggercore.log("My account");
+}
+
+function LogOut(){
+  loggercore.log("Logging out....")
+  storecore.delete('unicorn.username');
+  storecore.delete('unicorn.password');
+  const BrowserWindow = remote.BrowserWindow;
+  let win = new BrowserWindow({ titleBarStyle: 'default', width: 800, height: 600, frame: false, backgroundColor: '#2e2c29' , title:"BallRena Launcher | Login" })
+  win.loadURL(`file://${__dirname}/login.html`);
+  //Close windows
+  var window = remote.getCurrentWindow();
+  window.close();
+}
+
+document.getElementById('account-button').addEventListener('click', () => {
   remote.getCurrentWindow().minimize()
 })
 
