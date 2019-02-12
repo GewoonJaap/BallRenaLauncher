@@ -1,5 +1,5 @@
 {
-  "name": "electron-boilerplate",
+  "name": "ballrena-launcher",
   "productName": "BallRena Launcher",
   "description": "BallRena game launcher and updater | Made with ElectronJS",
   "version": "0.0.0",
@@ -19,7 +19,13 @@
     "directories": {
       "buildResources": "resources"
     },
-    "publish": null
+    "publish": [
+      {
+        "provider": "github",
+        "repo": "BallRenaLauncherDownloads",
+        "owner": "GewoonJaap"
+      }
+    ]
   },
   "scripts": {
     "postinstall": "electron-builder install-app-deps",
@@ -30,7 +36,8 @@
     "test": "npm run unit && npm run e2e",
     "start": "node build/start.js",
     "release": "npm test && webpack --config=build/webpack.app.config.js --env=production && electron-builder",
-    "release2": "electron-builder"
+    "release2": "electron-builder",
+    "publish": "electron-builder --publish always"
   },
   "dependencies": {
     "electron-dl": "^1.13.0",
