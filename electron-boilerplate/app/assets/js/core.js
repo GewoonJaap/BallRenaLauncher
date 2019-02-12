@@ -65,7 +65,7 @@ function LogOut(){
   storecore.delete('unicorn.username');
   storecore.delete('unicorn.password');
   const BrowserWindow = remote.BrowserWindow;
-  let win = new BrowserWindow({ titleBarStyle: 'default', width:1280, height:720, minWidth: 800, minHeight: 600, frame: false, backgroundColor: '#2e2c29' , title:"BallRena Launcher | Login" })
+  let win = new BrowserWindow({ titleBarStyle: 'default', width:800, height:600, minWidth: 800, minHeight: 600, frame: false, backgroundColor: '#2e2c29' , title:"BallRena Launcher | Login" })
   win.loadURL(`file://${__dirname}/login.html`);
   //Close windows
   var window = remote.getCurrentWindow();
