@@ -3,7 +3,8 @@ const path = require('path')
 const loggercore = require('./assets/js/loggerutil.js')('%c[Core]', 'color: #7289da; font-weight: bold');
 const Storecore = require('electron-store');
 const storecore = new Storecore();
-
+const unhandled = require('electron-unhandled');
+const {openNewGitHubIssue, debugInfo} = require('electron-util');
 
 //Program info log!
 loggercore.log("NODE.JS version: " + process.versions.node);
@@ -88,3 +89,15 @@ document.getElementById('min-max-button').addEventListener('click', () => {
 document.getElementById('close-button').addEventListener('click', () => {
   remote.app.quit()
 })
+
+
+//Messages
+unhandled({
+	reportButton: error => {
+		openNewGitHubIssue({
+			user: 'GewoonJaap',
+			repo: 'BallRenaLauncherDownloads',
+			body: `\`\`\`\n${error.stack}\n\`\`\`\n\n---\n\n${debugInfo()}`
+		});
+	}
+});

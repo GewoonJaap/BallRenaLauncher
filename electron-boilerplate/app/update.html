@@ -3,5 +3,14 @@
         <link rel="stylesheet" href="./assets/css/update.css">   
 </head>
     <body>
+        <script>
+            const loggerupdate = require('./assets/js/loggerutil.js')('%c[Updater]', 'color: #7289da; font-weight: bold');
+            const { ipcRenderer } = require('electron');
+            ipcRenderer.on('message', function (event, text) {
+                loggerupdate.log(text);
+              document.getElementById('maintext').innerText = text;
+            });
+            </script>
+        <p2 id="maintext">Searching for updates...</p2>
     </body>
 </html>

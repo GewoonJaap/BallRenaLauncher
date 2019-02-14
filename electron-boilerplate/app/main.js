@@ -1,6 +1,15 @@
 // Modules to control application life and create native browser window
-const {app, BrowserWindow, remote, electron} = require('electron');
+const electron = require('electron');
+const {autoUpdater} = require('electron-updater');
+const log = require('electron-log');
+const {app, BrowserWindow, remote} = require('electron');
 const isDev = require('electron-is-dev');
+
+
+// configure logging
+autoUpdater.logger = log;
+autoUpdater.logger.transports.file.level = 'info';
+log.info('App starting...');
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
@@ -12,7 +21,8 @@ function createWindow () {
 
   // and load the index.html of the app.
   if(!isDev){
-  mainWindow.loadFile('./app/main.html')
+  mainWindow.loadFile('./app/update.html')
+  mainWindow.webContents.openDevTools();
   autoUpdater.checkForUpdates();
   }
   if(isDev){
@@ -56,48 +66,41 @@ app.on('activate', function () {
 
 // In this file you can include the rest of your app's specific main process
 // code. You can also put them in separate files and require them here.
+//-------------------------------------------------------------------
+// Auto updates
+//-------------------------------------------------------------------
+const sendStatusToWindow = (text) => {
+  log.info(text);
+  if (mainWindow) {
+    mainWindow.webContents.send('message', text);
+  }
+};
 
-const { autoUpdater } = require("electron-updater")
+autoUpdater.on('checking-for-update', () => {
+  sendStatusToWindow('Checking for update...');
+});
+autoUpdater.on('update-available', info => {
+  sendStatusToWindow('Update available.');
+});
+autoUpdater.on('update-not-available', info => {
+  sendStatusToWindow('Update not available.');
+  mainWindow.loadFile('./app/main.html')
+});
+autoUpdater.on('error', err => {
+  sendStatusToWindow(`Error in auto-updater: ${err.toString()}`);
+});
+autoUpdater.on('download-progress', progressObj => {
+  sendStatusToWindow(
+    `Download speed: ${progressObj.bytesPerSecond} - Downloaded ${progressObj.percent}% (${progressObj.transferred} + '/' + ${progressObj.total} + )`
+  );
+});
+autoUpdater.on('update-downloaded', info => {
+  sendStatusToWindow('Update downloaded; will install now');
+});
 
-autoUpdater.logger = require('./assets/js/loggerutil.js')('%c[Updater]', 'color: #7289da; font-weight: bold');
-UpdaterLog = require('./assets/js/loggerutil.js')('%c[Updater]', 'color: #7289da; font-weight: bold');
-if(!isDev){
-autoUpdater.on('checking-for-update', () =>{
-    UpdaterLog.log("Checking for update");
-})
-
-autoUpdater.on('update-available', (info) => {
-UpdaterLog.log("Update available");
-//UpdaterLog.log("Version: " + info.version);
-//UpdaterLog.log("Release date: "+ info.releaseDate);
-autoUpdater.downloadUpdate();
-})
-
-autoUpdater.on('update-not-available', () =>{
-    UpdaterLog.log("No version available");
-    const loggermain = require('./assets/js/loggerutil.js')('%c[Main]', 'color: #7289da; font-weight: bold');
-    //Open login screen
-    const BrowserWindow = electron.remote.BrowserWindow;
-    let win = new BrowserWindow({ titleBarStyle: 'default', width: 800, height: 600, frame: false, backgroundColor: '#2e2c29' , title:"BallRena Launcher | Login" })
-    loggermain.log("Booting up.....");
-    win.loadURL(`file://${__dirname}/login.html`);
-    win.webContents.openDevTools()
-    //Close windows
-    var window = electron.remote.getCurrentWindow();
-    window.close();
-})
-
-autoUpdater.on('download-progress', (progress) =>{
-    UpdaterLog.log(`Progress ${Math.floor(progress.percent)}`);
-})
-
-autoUpdater.on('update-downloaded', (info) =>{
-    UpdaterLog.log("Done");
-    autoUpdater.quitAndInstall();
-})
-
-autoUpdater.on('error', (error) =>{
-    UpdaterLog.error(error)
-})
-
-}
+autoUpdater.on('update-downloaded', info => {
+  // Wait 5 seconds, then quit and install
+  // In your application, you don't need to wait 500 ms.
+  // You could call autoUpdater.quitAndInstall(); immediately
+  autoUpdater.quitAndInstall();
+});
