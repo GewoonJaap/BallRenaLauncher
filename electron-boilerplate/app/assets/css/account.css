@@ -2,8 +2,8 @@ body{
     padding: 0;
     margin: 0;
     user-select: none;
-
     font-family: 'Ubuntu', sans-serif;
+    overflow: hidden;
 }
 
 #spacer{
@@ -11,8 +11,11 @@ body{
 }
 
 .basicaccount{
-background-color: yellow;
-margin-left: 60vh;
+background-color: rgb(52, 55, 61);
+width: 70%;
+height: 100%;
+float: right;
+padding-top: 10vh;
 }
 
 .settingslist{
@@ -23,7 +26,6 @@ margin-left: 60vh;
     margin-right: 70%;
     padding-top: 10vh;
     overflow-y: auto;
-    padding-bottom: 10vh;
     z-index: 1;
     font-size: 25px;
     list-style-type: none;
@@ -56,6 +58,38 @@ li{
     border-bottom: 3px solid rgb(112, 73, 252);
     padding-bottom:5px;
     color: yellow;
+}
+.basicaccounttext{
+    margin-left: 10%;
+    font-family: 'Ubuntu', sans-serif;
+}
+
+.headertext{
+    color: white;
+    font-size: 33px;
+}
+
+.basicaccountinfo{
+    background-color: rgb(28, 29, 31);
+    border-radius: 10px;
+    margin-top: 5%;
+    width: 50%;
+    height: 17%;
+    color: white;
+    font-size: 18px;
+}
+#logout{
+    color: red;
+    font-weight: bold;
+}
+#logout:hover{
+    color: rgb(168, 0, 0);
+    font-weight: bolder;
+}
+.basicaccountinfotext{
+    margin-left: 10%;
+    text-align: center;
+    padding-top: 5%;
 }
 
 

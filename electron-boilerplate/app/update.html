@@ -1,16 +1,43 @@
 <html>
 <head>
         <link rel="stylesheet" href="./assets/css/update.css">   
+        <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
+        <title>BallRena Launcher | Updater</title>
 </head>
     <body>
-        <script>
+           <div id="Update">
+               <p2 id="text">BallRena Updater</p2>
+                <br>
+                <br>
+                <p2 id="maintext">Searching for updates...</p2>
+               </div>
+       
+
+       <script>
+            
             const loggerupdate = require('./assets/js/loggerutil.js')('%c[Updater]', 'color: #7289da; font-weight: bold');
             const { ipcRenderer } = require('electron');
             ipcRenderer.on('message', function (event, text) {
-                loggerupdate.log(text);
+            loggerupdate.log(text);
+            console.log(text);
               document.getElementById('maintext').innerText = text;
             });
             </script>
-        <p2 id="maintext">Searching for updates...</p2>
+
+            <script>
+            const unhandled = require('electron-unhandled');
+            const {openNewGitHubIssue, debugInfo} = require('electron-util');
+
+            unhandled({
+	                reportButton: error => {
+		            openNewGitHubIssue({
+			        user: 'GewoonJaap',
+			        repo: 'BallRenaLauncherDownloads',
+			        body: `\`\`\`\n${error.stack}\n\`\`\`\n\n---\n\n${debugInfo()}`
+		});
+	}
+});
+            </script>
+        
     </body>
 </html>

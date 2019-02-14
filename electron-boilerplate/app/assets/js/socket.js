@@ -198,6 +198,7 @@ function Register()
                   loggersocket.log("Register: " + json.login)
                   loggersocket.log(json.loginreqkey);
                 loginkey = json.loginreqkey;
+                store.set('unicorn.email', email);
                 SaveLoginKey();
                 document.getElementById("submit classr").value = "Register" + emoji.get('heavy_check_mark');
                 loggersocket.log("Opening main menu....");
