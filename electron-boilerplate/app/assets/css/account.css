@@ -86,7 +86,21 @@ li{
 }
 #logout:hover{
     color: rgb(168, 0, 0);
-    font-weight: bolder;
+}
+
+#logoutbtn{
+    background-color: transparent;
+    border-radius: 4px;
+    outline: transparent;
+    border: red solid 2px;
+    margin-left: 10%;
+    text-align: center;
+    padding-right: 10px;
+    font-family: 'Ubuntu', sans-serif;
+    padding-bottom: 4px;
+}
+#logoutbtn:hover{
+    border: rgb(168, 0, 0) solid 2px;
 }
 .basicaccountinfotext{
     margin-left: 10%;

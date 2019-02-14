@@ -46,6 +46,7 @@ body {
     display: inline-block;
     font-size: 18px;
     margin-top: 10vh;
+    outline: none;
 }
 
 #DownloadButton:hover{
