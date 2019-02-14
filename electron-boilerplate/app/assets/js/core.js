@@ -27,7 +27,7 @@ if(process.defaultApp){
 }
 if(document.getElementById('minimize-button') !=null){
 document.getElementById('minimize-button').addEventListener('click', () => {
-  MyAccount();
+  remote.getCurrentWindow().minimize()
 })
 }
 if(document.getElementById('mainmenu-button') !=null){
@@ -74,7 +74,8 @@ function LogOut(){
 }
 if(document.getElementById('account-button') !=null){
 document.getElementById('account-button').addEventListener('click', () => {
-  remote.getCurrentWindow().minimize()
+  
+  MyAccount();
 })
 }
 document.getElementById('min-max-button').addEventListener('click', () => {
