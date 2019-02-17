@@ -32,7 +32,8 @@ else{
 function DownloadMBS(){
     if(Downloading == true){
     const fs = require("fs"); //Load the filesystem module
-    const stats = fs.statSync("v.0.0.2.zip")
+    const stats = fs.statSync( __dirname + "/v.0.0.2.zip")
+    loggerhome.log("Working directory: " +  __dirname)
 const fileSizeInBytes = stats.size
 //Convert the file size to megabytes (optional)
 const fileSizeInMegabytes = fileSizeInBytes / 1000000.0
