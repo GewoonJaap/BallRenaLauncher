@@ -20,7 +20,7 @@
             ipcRenderer.on('message', function (event, text) {
             loggerupdate.log(text);
             console.log(text);
-              document.getElementById('maintext').innerText = text;
+              document.getElementById('maintext').innerHTML = text;
             });
             </script>
             <script>
