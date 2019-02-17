@@ -5,6 +5,7 @@ const Storecore = require('electron-store');
 const storecore = new Storecore();
 const unhandled = require('electron-unhandled');
 const {openNewGitHubIssue, debugInfo} = require('electron-util');
+const si = require('systeminformation');
 
 //Program info log!
 loggercore.log("NODE.JS version: " + process.versions.node);
@@ -102,3 +103,18 @@ unhandled({
 		});
 	}
 });
+
+
+//PC info
+
+si.cpu()
+    .then(data => {
+        console.log('CPU Information:');
+        console.log('- manufucturer: ' + data.manufacturer);
+        console.log('- brand: ' + data.brand);
+        console.log('- speed: ' + data.speed);
+        console.log('- cores: ' + data.cores);
+        console.log('- physical cores: ' + data.physicalCores);
+        console.log('...');
+    })
+    .catch(error => console.error(error));

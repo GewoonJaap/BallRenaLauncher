@@ -4,9 +4,11 @@ const {autoUpdater} = require('electron-updater');
 const log = require('electron-log');
 const {app, BrowserWindow, remote} = require('electron');
 const isDev = require('electron-is-dev');
+var os = require('os');
 
 
 // configure logging
+var platform = os.platform() + '_' + os.arch();
 autoUpdater.logger = log;
 autoUpdater.logger.transports.file.level = 'info';
 log.info('App starting...');
@@ -78,6 +80,7 @@ const sendStatusToWindow = (text) => {
 
 autoUpdater.on('checking-for-update', () => {
   sendStatusToWindow('Checking for update...');
+  console.log("Checking")
 });
 autoUpdater.on('update-available', info => {
   sendStatusToWindow('Update available.');
