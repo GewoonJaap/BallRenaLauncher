@@ -2,7 +2,6 @@ var request = require('request');
 var emoji = require('node-emoji');
 const loggerdownload = require('./assets/js/loggerutil.js')('%c[Game Downloader]', 'color: #7289da; font-weight: bold');
 loggerdownload.log(__dirname)
-var os = require('os');
 
 // Game Info
 var ReleaseDatum;
@@ -37,6 +36,7 @@ function GetLatestRelease(){
             loggerdownload.log("Publisher: " + Publisher);
             loggerdownload.log("Patchnotes: " + PatchNotes);
             loggerdownload.log("Platform: " + os.platform());
+            store.set('game.version', GameVersionLatest);
             document.getElementById('patchnotes').innerHTML = PatchNotes;
             document.getElementById('LatestVersion').innerText = "Patchnotes: v" + GameVersionLatest;
             

@@ -31,49 +31,51 @@ else{
 
 function DownloadMBS(){
     if(Downloading == true){
+    var url = store.get('game.download')
+    var val = url.toString();
+    var zipFile = val.substr(val.lastIndexOf("/") + 1)
     const fs = require("fs"); //Load the filesystem module
-    const stats = fs.statSync( __dirname + "/v.0.0.2.zip")
-    loggerhome.log("Working directory: " +  __dirname)
-const fileSizeInBytes = stats.size
+    const stats = fs.statSync(zipFile)
+    const fileSizeInBytes = stats.size
 //Convert the file size to megabytes (optional)
-const fileSizeInMegabytes = fileSizeInBytes / 1000000.0
-console.log(fileSizeInMegabytes.toFixed(1));
+    const fileSizeInMegabytes = fileSizeInBytes / 1000000.0
+    loggerdownload.log("MB downloaded: " + fileSizeInMegabytes.toFixed(1));
     document.getElementById('DownloadButton').innerHTML = "Downloading | MB: " + fileSizeInMegabytes.toFixed(1);
     setInterval(DownloadMBS,500)
     }
 }
 
 function DownloadGame(){
-    Downloading = true;
-    DownloadMBS();
     document.getElementById('DownloadButton').innerHTML = "Downloading..."
     var home = require("os").homedir();
+    var url = store.get('game.download')
+    var val = url.toString();
+    var zipFile = val.substr(val.lastIndexOf("/") + 1)
     const repoName = 'node-zip-download-sample';
-    const href = `https://www.ballrena.ml/assets/launcher`;
-    const zipFile = 'v.0.0.2.zip';
-    const source = `${href}/${zipFile}`;
+    const href = url;
     const extractEntryTo = `${zipFile}/`;
     const outputDir = `./${zipFile}/`;
     const unzip = require('unzip')
     console.log('href', href);
-    console.log('source', source);
     console.log('extractEntryTo', extractEntryTo);
     console.log('outputDir', outputDir);
-
+    loggerdownload.log('ZipFile', zipFile);
+    Downloading = true;
+    setInterval(DownloadMBS,1500)
 
 
     request
-      .get(source)
+      .get(href)
       .on('error', function(error) {
-        console.log(error);
+        loggerdownload.log(error);
       })
       .pipe(fs.createWriteStream(zipFile))
       .on('finish', function() {
-        console.log('finished dowloading');
+        loggerdownload.log('finished dowloading');
         Downloading = false;
         fs.createReadStream(zipFile).pipe(unzip.Extract({ path: home + '/Documents/BallRena/Game' }));
-        document.getElementById('DownloadButton').innerHTML = "Downloaded.."
-        store.set('unicorn.gameversion', 'v1.0')
+        document.getElementById('DownloadButton').innerHTML = "Installed | " + store.get('game.version')
+        store.set('unicorn.gameversion', store.get('game.version'))
       });
 }
 
