@@ -96,7 +96,7 @@ autoUpdater.on('update-not-available', info => {
 });
 autoUpdater.on('error', err => {
   if(process.platform == "darwin"){
-    sendStatusToWindow('Download the update at: <a href="https://download.ballrena.ml/download">https://download.ballrena.ml/download</a>.');
+    sendStatusToWindow('Download the update at: <a href="https://download.ballrena.ml/download">https://download.ballrena.ml/download</a>.<br>' + err.toString());
   }
   else{
   sendStatusToWindow(`Error in auto-updater: ${err.toString()}`);
