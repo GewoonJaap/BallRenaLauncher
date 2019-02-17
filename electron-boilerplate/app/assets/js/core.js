@@ -111,12 +111,32 @@ unhandled({
 
 si.cpu()
     .then(data => {
-        console.log('CPU Information:');
-        console.log('- manufucturer: ' + data.manufacturer);
-        console.log('- brand: ' + data.brand);
-        console.log('- speed: ' + data.speed);
-        console.log('- cores: ' + data.cores);
-        console.log('- physical cores: ' + data.physicalCores);
-        console.log('...');
+        loggercore.log('CPU Information:');
+        loggercore.log('- manufucturer: ' + data.manufacturer);
+        loggercore.log('- brand: ' + data.brand);
+        loggercore.log('- speed: ' + data.speed);
+        loggercore.log('- cores: ' + data.cores);
+        loggercore.log('- physical cores: ' + data.physicalCores);
+    })
+    .catch(error => console.error(error));
+
+    
+    si.system()
+    .then(data => {
+      loggercore.log('System Information:');
+      loggercore.log('- manufucturer: ' + data.manufacturer);
+      loggercore.log('- model: ' + data.model);
+      loggercore.log('- serial: ' + data.serial);
+      loggercore.log('- UUID: ' + data.uuid);
+      store.set('pc.uuid', data.uuid);
+    })
+
+    si.graphics()
+    .then(data => {
+      loggercore.log('System Information:');
+      loggercore.log('- Model: ' + data.controllers[0].model );
+      loggercore.log('- Vendor: ' + data.controllers[0].vendor );
+      loggercore.log('- Model: ' + data.controllers[0].vram );
+      store.set('pc.gpu', data.controllers[0].model)
     })
     .catch(error => console.error(error));
