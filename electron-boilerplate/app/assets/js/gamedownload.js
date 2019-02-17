@@ -39,6 +39,19 @@ function GetLatestRelease(){
             store.set('game.version', GameVersionLatest);
             document.getElementById('patchnotes').innerHTML = PatchNotes;
             document.getElementById('LatestVersion').innerText = "Patchnotes: v" + GameVersionLatest;
+            if(store.get('unicorn.gameversion') == store.get('game.version'))
+            {
+                document.getElementById('DownloadButton').innerHTML = "Play" + emoji.get('video_game')
+                loggerhome.log("Game is up-to-date!");
+            }
+            if(store.get('unicorn.gameversion') != undefined && store.get('unicorn.gameversion') != store.get('game.version')){
+                document.getElementById('DownloadButton').innerHTML = "Update | v" + GameVersionLatest;
+                loggerdownload.log("Update required!")
+            }
+            else if(store.get('unicorn.gameversion') == undefined){
+                document.getElementById('DownloadButton').innerHTML = "Install | v" + GameVersionLatest;
+                loggerhome.log("Game is not installed yet!");
+            }
             
             for(let i = 0; i < GameURLArray.length; i++){
                 if(GameURLArray[i].browser_download_url.indexOf(os.platform()) > -1){

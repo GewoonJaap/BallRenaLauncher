@@ -18,13 +18,7 @@ function OpenLink(url){
     open(url);
 }
 
-//Get game
-if(store.get('unicorn.gameversion') != undefined){
-document.getElementById('DownloadButton').innerHTML = "Game version: " + store.get('unicorn.gameversion')
-}
-else{
-    document.getElementById('DownloadButton').innerHTML = "Download"
-}
+
 
 
 //Download
@@ -71,11 +65,13 @@ function DownloadGame(){
       })
       .pipe(fs.createWriteStream(zipFile))
       .on('finish', function() {
-        loggerdownload.log('finished dowloading');
+        document.getElementById('DownloadButton').innerHTML = "Installing..."
+        loggerdownload.log('Installing..');
         Downloading = false;
         fs.createReadStream(zipFile).pipe(unzip.Extract({ path: home + '/Documents/BallRena/Game' }));
         document.getElementById('DownloadButton').innerHTML = "Installed | " + store.get('game.version')
-        store.set('unicorn.gameversion', store.get('game.version'))
+        store.set('unicorn.gameversion', store.get('game.version'));
+        store.set('game.installed', "true");
       });
 }
 
