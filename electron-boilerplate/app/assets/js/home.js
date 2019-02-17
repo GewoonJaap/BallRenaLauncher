@@ -1,6 +1,7 @@
 var open = require("open");
 const {app, BrowserWindow, ipcMain, Menu } = require('electron')
 const loggerhome = require('./assets/js/loggerutil.js')('%c[Main Menu]', 'color: #7289da; font-weight: bold');
+const loggerballrena = require('./assets/js/loggerutil.js')('%c[BallRena]', 'color: #26ff00; font-weight: bold');
 const Store = require('electron-store');
 const store = new Store();
 const admZip = require('adm-zip');
@@ -8,6 +9,7 @@ const requesthome = require('superagent');
 var username;
 var url;
 var Downloading = false;
+var Game_exec
 
 username = store.get('unicorn.username');
 loggerhome.log("Username found: " + username);
@@ -40,6 +42,30 @@ function DownloadMBS(){
 }
 
 function DownloadGame(){
+  if(store.get("game.ready") == "true"){
+    loggerhome.log("Launching game....");
+    if(os.platform() == "win32")
+    {
+      Game_exec = "BallRenaGame.exe";
+    }
+    else{
+      Game_exec = "MacVersie.app";
+    }
+      var home = require("os").homedir();
+      var child = require('child_process').execFile;
+      var executablePath = home + '/Documents/BallRena/Game/' + Game_exec;
+
+child(executablePath, function(err, data) {
+    if(err){
+       loggerhome.error(err);
+       return;
+    }
+ 
+    loggerballrena.log(data.toString());
+});
+    
+  }
+  else{
     document.getElementById('DownloadButton').innerHTML = "Downloading..."
     var home = require("os").homedir();
     var url = store.get('game.download')
@@ -73,5 +99,6 @@ function DownloadGame(){
         store.set('unicorn.gameversion', store.get('game.version'));
         store.set('game.installed', "true");
       });
+    }
 }
 
