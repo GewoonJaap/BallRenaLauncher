@@ -36,8 +36,8 @@
             <div></div>
             <section id="spacer"></section>
             <div class="head">
-              <div class="basicaccount">
-                <div class="basicaccounttext">
+              <div class="basicaccount" id="basicaccount">
+                <div class="basicaccounttext" id="basicaccounttext">
                   <p2 class="headertext">My Account</p2>
                   <br>
                     <div class="basicaccountinfo">
@@ -52,10 +52,26 @@
                       <button id="logoutbtn"  onclick="LogOut()"><p2 class="basicaccountinfotext" id="logout">Logout</p2></button>
                     </div>
                 </div>
+                <div class="basicgame" id="basicgame">
+                    <p2 class="headertext">BallRena Game</p2>
+                    <br>
+                      <div class="basicaccountinfo">
+                        <br>
+                        <p2 class="basicaccountinfotext" id="gameinstalled">Game version: Loading..</p2>
+                        <br>
+                        <p2 class="basicaccountinfotext" id="username">Username: Loading...</p2>
+                        <br>
+                        <p2 class="basicaccountinfotext" id="banned">Banned: Loading.</p2>
+                        <br>
+                        <br>
+                        <button id="logoutbtn"  onclick="UninstallGame()"><p2 class="basicaccountinfotext" id="logout">Uninstall</p2></button>
+                      </div>
+                  </div>
               </div>
             <div class="settingslist">
              <div class="settingslistul"> 
-                <li><p2>Account</p2></li>   
+                <li onclick="ToAccount()"><p2>Account</p2></li> <br>
+                <li  onclick="ToGame()"><p2>Game</p2></li>   
               </div>    
             </div>
           </div>

@@ -63,6 +63,12 @@ li{
     margin-left: 10%;
     font-family: 'Ubuntu', sans-serif;
 }
+.basicgame{
+    margin-left: 10%;
+    font-family: 'Ubuntu', sans-serif;
+    visibility: hidden;
+    height: 0;
+}
 
 .headertext{
     color: white;
