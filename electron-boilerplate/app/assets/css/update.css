@@ -22,3 +22,10 @@ body{
   font-weight: bold;
   color: aqua;
 }
+
+a{
+  font-weight: bold;
+  color: aqua;
+  font-weight: normal;
+  font-style: normal;
+}
