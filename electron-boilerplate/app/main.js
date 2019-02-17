@@ -84,7 +84,7 @@ autoUpdater.on('checking-for-update', () => {
 });
 autoUpdater.on('update-available', info => {
   if(process.platform == "darwin"){
-    sendStatusToWindow('Download the update at: <a>https://download.ballrena.ml/download</a>.');
+    sendStatusToWindow('Download the update at: <a href="https://download.ballrena.ml/download">https://download.ballrena.ml/download</a>.');
   }
   else{
     sendStatusToWindow('Update available.');
@@ -96,7 +96,7 @@ autoUpdater.on('update-not-available', info => {
 });
 autoUpdater.on('error', err => {
   if(process.platform == "darwin"){
-    sendStatusToWindow('Download the update at: <a>https://download.ballrena.ml/download</a>.');
+    sendStatusToWindow('Download the update at: <a href="https://download.ballrena.ml/download">https://download.ballrena.ml/download</a>.');
   }
   else{
   sendStatusToWindow(`Error in auto-updater: ${err.toString()}`);
@@ -104,7 +104,7 @@ autoUpdater.on('error', err => {
 });
 autoUpdater.on('download-progress', progressObj => {
   if(process.platform == "darwin"){
-    sendStatusToWindow('Download the update at: <a>https://download.ballrena.ml/download</a>.');
+    sendStatusToWindow('Download the update at: <a href="https://download.ballrena.ml/download">https://download.ballrena.ml/download</a>.');
   }
   else{
   sendStatusToWindow(
@@ -121,7 +121,7 @@ autoUpdater.on('update-downloaded', info => {
   // In your application, you don't need to wait 500 ms.
   // You could call autoUpdater.quitAndInstall(); immediately
   if(process.platform == "darwin"){
-    sendStatusToWindow('Download the update at: <a>https://download.ballrena.ml/download</a>.');
+    sendStatusToWindow('Download the update at: <a href="https://download.ballrena.ml/download">https://download.ballrena.ml/download</a>.');
   }
   else{
   autoUpdater.quitAndInstall();

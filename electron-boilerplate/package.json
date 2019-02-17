@@ -2,7 +2,7 @@
   "name": "ballrena-launcher",
   "productName": "BallRena Launcher",
   "description": "BallRena game launcher and updater | Made with ElectronJS",
-  "version": "1.5.3",
+  "version": "1.5.4",
   "private": true,
   "author": "BallRena",
   "copyright": "© 2019, BallRena",
