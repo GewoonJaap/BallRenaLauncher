@@ -42,18 +42,19 @@ function DownloadMBS(){
 }
 
 function DownloadGame(){
+  var home = require("os").homedir();
+  var child = require('child_process').execFile;
+  
   if(store.get("game.ready") == "true"){
     loggerhome.log("Launching game....");
     if(os.platform() == "win32")
     {
-      Game_exec = "BallRenaGame.exe";
+      var executablePath = home + '/Documents/BallRena/Game/BallRenaGame.exe';
     }
     else{
-      Game_exec = "MacVersie.app";
+      var executablePath = 'open -n ' +home + '/Documents/BallRena/Game/MacVersie.app';
     }
-      var home = require("os").homedir();
-      var child = require('child_process').execFile;
-      var executablePath = home + '/Documents/BallRena/Game/' + Game_exec;
+      
 
 child(executablePath, function(err, data) {
     if(err){
