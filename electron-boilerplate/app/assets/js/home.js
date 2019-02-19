@@ -98,6 +98,7 @@ child(executablePath, function(err, data) {
         document.getElementById('DownloadButton').innerHTML = "Installed | " + store.get('game.version')
         store.set('unicorn.gameversion', store.get('game.version'));
         store.set('game.installed', "true");
+        GetLatestRelease();
       });
     }
 }
