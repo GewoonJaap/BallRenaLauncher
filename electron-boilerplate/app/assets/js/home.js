@@ -52,6 +52,7 @@ function DownloadGame(){
       var executablePath = home + '/Documents/BallRena/Game/BallRenaGame.exe';
     }
     else{
+      const { execFile } = require('child_process');
       var executablePath = home + '/Documents/BallRena/Game/MacVersie.app';
     const child2 = execFile(executablePath, ['--version'], (error, stdout, stderr) => {
    if (error) {
