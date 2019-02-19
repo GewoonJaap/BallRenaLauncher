@@ -39,17 +39,6 @@ function GetLatestRelease(){
             store.set('game.version', GameVersionLatest);
             document.getElementById('patchnotes').innerHTML = PatchNotes;
             document.getElementById('LatestVersion').innerText = "Patchnotes: v" + GameVersionLatest;
-            for(let i = 0; i < GameURLArray.length; i++){
-                if(GameURLArray[i].browser_download_url.indexOf(os.platform()) > -1){
-                    loggerdownload.log(GameURLArray[i].browser_download_url)
-                    store.set('game.download', GameURLArray[i].browser_download_url);
-                    return true;
-                }
-                else{
-                loggerdownload.log("Download " + i + ": " + GameURLArray[i].browser_download_url);
-                }
-             
-                }
             if(store.get('unicorn.gameversion') == store.get('game.version'))
             {
                 document.getElementById('DownloadButton').innerHTML = "Play" + emoji.get('video_game')
@@ -66,6 +55,17 @@ function GetLatestRelease(){
                 loggerhome.log("Game is not installed yet!");
                 store.set('game.ready', "false");
             }
+            for(let i = 0; i < GameURLArray.length; i++){
+                if(GameURLArray[i].browser_download_url.indexOf(os.platform()) > -1){
+                    loggerdownload.log(GameURLArray[i].browser_download_url)
+                    store.set('game.download', GameURLArray[i].browser_download_url);
+                    return true;
+                }
+                else{
+                loggerdownload.log("Download " + i + ": " + GameURLArray[i].browser_download_url);
+                }
+             
+                }
             
            
              
