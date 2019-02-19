@@ -135,6 +135,7 @@ function LoginSaved()
                   let win = new BrowserWindow({minWidth: 1280, minHeight: 720, width: 1280, height: 720, frame: false, titleBarStyle: 'default', webPreferences: {devTools: true }, backgroundColor: '#2e2c29' , title:"BallRena Launcher" })
                   loggersocket.log("Opening...");
                   win.loadURL(`file://${__dirname}/home.html`);
+                  win.webContents.openDevTools()
                   //Close windows
                   var window = electron.remote.getCurrentWindow();
                   window.close();
