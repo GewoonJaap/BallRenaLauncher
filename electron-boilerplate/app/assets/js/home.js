@@ -52,7 +52,7 @@ function DownloadGame(){
       var executablePath = home + '/Documents/BallRena/Game/BallRenaGame.exe';
     }
     else{
-      var executablePath = home + '/Documents/BallRena/Game/MacVersie.app/Contents/MacOS/App';
+      var executablePath = home + '/Documents/BallRena/Game/MacVersie.app/Contents/MacOS/MacVersie';
     }
       
 
