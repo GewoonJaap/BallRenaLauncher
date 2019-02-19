@@ -66,11 +66,11 @@ else if(banned = "false"){
     document.getElementById('banned').innerText = "Banned: " + bannedvar;
     document.getElementById('HWID').innerText = "HardwareID: " + store.get("pc.uuid");
     document.getElementById('GPU').innerText = "Graphics card: " + store.get('pc.gpu');
-    if(store.get('unicorn.version') == undefined){
+    if(store.get('game.version') == undefined){
         document.getElementById('gameinstalled').innerText = "Game version: Not installed!";
     }
     else{
-    document.getElementById('gameinstalled').innerText = "Game version: " + store.get('unicorn.version');
+    document.getElementById('gameinstalled').innerText = "Game version: " + store.get('game.version');
     }
 
 //Game func
