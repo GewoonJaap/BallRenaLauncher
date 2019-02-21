@@ -4,6 +4,7 @@ const fs = require('fs');
 var socket = io('https://ballrena-node-backend.herokuapp.com');
 var loginkey = store.get('unicorn.loginkey')
 GetUserStats();
+var rank;
 
 socket.on('connect', function(){
     loggerbackend.log("Connected to master server!");
@@ -54,6 +55,7 @@ function GetUserStats(){
             store.delete('unicorn.email');
             store.delete('unicorn.rank');
             store.delete('unicorn.banned');
+            store.delete('unicorn.level');
             
             //Save info
             store.set('unicorn.exp', json.exp);
@@ -62,12 +64,14 @@ function GetUserStats(){
             store.set('unicorn.email', json.email);
             store.set('unicorn.rank', json.rank);
             store.set('unicorn.banned', json.banstatus);
+            store.set('unicorn.level', json.level);
             loggerbackend.log("Saved..")
 
             //Get page
-            if(document.title = "BallRena Launcher | Account")
+            if(document.title = "BallRena | Home")
             {
-              loggerbackend.log("Account page")
+              loggerbackend.log("Home page")
+              document.getElementById('PlayerStats').innerHTML = "XP: " + json.exp + "<br> Role: "+ json.rank + "<br> Level: " + json.level;
             }
 
           }

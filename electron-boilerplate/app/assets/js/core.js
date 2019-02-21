@@ -8,6 +8,15 @@ const {openNewGitHubIssue, debugInfo} = require('electron-util');
 const si = require('systeminformation');
 const os = require('os');
 
+let myNotification = new Notification('Title', {
+  body: 'Lorem Ipsum Dolor Sit Amet'
+})
+
+myNotification.onclick = () => {
+  console.log('Notification clicked')
+}
+
+
 //Program info log!
 loggercore.log("NODE.JS version: " + process.versions.node);
 loggercore.log("Chromium version: " + process.versions.chrome);
@@ -19,7 +28,7 @@ remote.getCurrentWebContents().on('devtools-opened', () => {
     console.log('%cIf you\'ve been told to paste something here, you\'re being scammed.', 'font-size: 16px')
     console.log('%cUnless you know exactly what you\'re doing, close this window.', 'font-size: 16px')
 })
-
+//Setting up menu bar
 if(process.defaultApp){
     if(process.argv.length >= 2){
         app.setAsDefaultProtocolClient('BallRenaLauncher', process.execPath, [path.resolve(process.argv[1])])
@@ -43,6 +52,7 @@ document.getElementById('logout-button').addEventListener('click', () => {
 LogOut();
 })
 }
+//To MyAccount page
 
 function MyAccount(){
   loggercore.log("My account");
@@ -53,7 +63,7 @@ function MyAccount(){
   var window = remote.getCurrentWindow();
   window.close();
 }
-
+// To MainMenu page
 function MainMenu(){
   loggercore.log("Main Menu");
   const BrowserWindow = remote.BrowserWindow;
@@ -63,7 +73,7 @@ function MainMenu(){
   var window = remote.getCurrentWindow();
   window.close();
 }
-
+//Logout
 function LogOut(){
   loggercore.log("Logging out....")
   storecore.delete('unicorn.username');
@@ -75,6 +85,9 @@ function LogOut(){
   var window = remote.getCurrentWindow();
   window.close();
 }
+
+//Menu buttons
+
 if(document.getElementById('account-button') !=null){
 document.getElementById('account-button').addEventListener('click', () => {
   
@@ -95,7 +108,8 @@ document.getElementById('close-button').addEventListener('click', () => {
 })
 
 
-//Messages
+
+//Unhandled error
 unhandled({
 	reportButton: error => {
 		openNewGitHubIssue({

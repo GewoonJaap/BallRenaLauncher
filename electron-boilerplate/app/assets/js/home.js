@@ -20,7 +20,9 @@ function OpenLink(url){
     open(url);
 }
 
+//Setup
 
+document.getElementById('AboutPlayer').innerText = "About: " + username
 
 
 //Download
