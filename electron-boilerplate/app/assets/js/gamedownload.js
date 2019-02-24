@@ -49,13 +49,18 @@ function GetLatestRelease(){
                 document.getElementById('DownloadButton').innerHTML = "Update | v" + GameVersionLatest;
                 loggerdownload.log("Update required!")
                 store.set('game.ready', "false");
-                let myNotification = new Notification('BallRena update', {
-                    body: 'BallRena Game is ready to get updated!'
-                  })
-                  
-                  myNotification.onclick = () => {
-                    console.log('Notification clicked')
+                notifier.notify({
+                  appName: 'nl.ballrena.electronjslauncher',
+                  title: 'BallRena Update',
+                  message: `BallRena is ready to get updated!`,
+                  sound: false,
+                  wait: true,
+                  icon: __dirname + './assets/img/avatar.png'
+                }, (err) => {
+                  if (err) {
+                    console.error('Snoretoast error: ', err);
                   }
+                });
             }
             else if(store.get('unicorn.gameversion') == undefined){
                 document.getElementById('DownloadButton').innerHTML = "Install | v" + GameVersionLatest;

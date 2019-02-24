@@ -5,6 +5,7 @@ const Store = require('electron-store');
 const store = new Store();
 const admZip = require('adm-zip');
 const requesthome = require('superagent');
+const notifier = require('node-notifier');
 var username;
 var url;
 var Downloading = false;
@@ -18,7 +19,6 @@ loggerhome.log("Loaded Home.js");
 function OpenLink(url){
   opn(url);
 }
-const notifier = require('node-notifier');
 notifier.notify({
   appName: 'nl.ballrena.electronjslauncher',
   title: 'Whatever',
