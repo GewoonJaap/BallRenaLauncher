@@ -10,7 +10,6 @@ const os = require('os');
 var popupS = require('popups');
 const opn = require('opn');
 
-
 //Program info log!
 loggercore.log("NODE.JS version: " + process.versions.node);
 loggercore.log("Chromium version: " + process.versions.chrome);

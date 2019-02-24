@@ -18,6 +18,19 @@ loggerhome.log("Loaded Home.js");
 function OpenLink(url){
   opn(url);
 }
+const notifier = require('node-notifier');
+notifier.notify({
+  appName: 'nl.ballrena.electronjslauncher',
+  title: 'Whatever',
+  message: `whatever`,
+  sound: false,
+  wait: true,
+  icon: __dirname + './assets/img/avatar.png'
+}, (err) => {
+  if (err) {
+    console.error('Snoretoast error: ', err);
+  }
+});
 
 //Open notice bar
 
@@ -31,11 +44,6 @@ function CloseNoticeBar(){
   document.getElementById('notice').style.height = '0';
   document.getElementById('notice').style.visibility = 'hidden';
 }
-
-//Setup
-
-document.getElementById('AboutPlayer').innerText = "About: " + username
-
 
 //Download
 

@@ -76,3 +76,12 @@ body {
     font-size: 50px;
     font-weight: bold;
 }
+#mediacontent{
+    display:block;
+    margin:auto;
+    text-align: center;
+}
+#MediaLogo{
+    height: 50%;
+    width: 50%;
+}
