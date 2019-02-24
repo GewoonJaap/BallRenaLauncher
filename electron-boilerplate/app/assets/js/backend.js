@@ -9,7 +9,8 @@ var rank;
 //Socket functions
 
 socket.on('connect', function(){
-    loggerbackend.log("Connected to master server!");
+    loggerbackend.log("Connected to master server!"); 
+    
   });
 
   socket.on('UUID', function(data) {
@@ -30,9 +31,7 @@ socket.on('connect', function(){
 
   })
   socket.on('online', function(data) {
-    loggerbackend.log(data.message);
     var socketonline = JSON.parse(data.message)
-    loggerbackend.log("Online players:" + socketonline.OnlinePlayers);
     store.set('game.online', socketonline.OnlinePlayers);
     if(document.title == 'BallRena | Account'){
       document.getElementById('online').innerHTML = "Players online: " + socketonline.OnlinePlayers;
@@ -41,6 +40,10 @@ socket.on('connect', function(){
 
   socket.on('disconnect', function(){
     loggerbackend.log("Connection lost! Trying to reconnect....");
+    popupS.alert({
+      title:   "Connectivity issue's!",
+      content: 'Connection to server lost!'
+  });
 });
 
 

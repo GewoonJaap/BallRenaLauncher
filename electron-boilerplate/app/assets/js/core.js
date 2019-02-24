@@ -7,6 +7,7 @@ const unhandled = require('electron-unhandled');
 const {openNewGitHubIssue, debugInfo} = require('electron-util');
 const si = require('systeminformation');
 const os = require('os');
+var popupS = require('popups');
 
 let myNotification = new Notification('Title', {
   body: 'Lorem Ipsum Dolor Sit Amet'
