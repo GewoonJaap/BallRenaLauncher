@@ -19,6 +19,19 @@ function OpenLink(url){
   opn(url);
 }
 
+//Open notice bar
+
+function OpenNoticeBar(noticetext){
+  document.getElementById('notice').style.height = '4vh';
+  document.getElementById('notice').style.visibility = 'visible';
+  document.getElementById('noticetext').innerHTML = noticetext;
+}
+
+function CloseNoticeBar(){
+  document.getElementById('notice').style.height = '0';
+  document.getElementById('notice').style.visibility = 'hidden';
+}
+
 //Setup
 
 document.getElementById('AboutPlayer').innerText = "About: " + username
@@ -100,6 +113,16 @@ child(executablePath, function(err, data) {
         document.getElementById('DownloadButton').innerHTML = "Installed | " + store.get('game.version')
         store.set('unicorn.gameversion', store.get('game.version'));
         store.set('game.installed', "true");
+
+        //Notification
+        let myNotification = new Notification('BallRena updated', {
+          body: 'BallRena Game is updated to: ' + store.get('game.version')
+        })
+        
+        myNotification.onclick = () => {
+          console.log('Notification clicked')
+        }
+        //Check for update
         GetLatestRelease();
       });
     }

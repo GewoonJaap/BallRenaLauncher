@@ -49,6 +49,13 @@ function GetLatestRelease(){
                 document.getElementById('DownloadButton').innerHTML = "Update | v" + GameVersionLatest;
                 loggerdownload.log("Update required!")
                 store.set('game.ready', "false");
+                let myNotification = new Notification('BallRena update', {
+                    body: 'BallRena Game is ready to get updated!'
+                  })
+                  
+                  myNotification.onclick = () => {
+                    console.log('Notification clicked')
+                  }
             }
             else if(store.get('unicorn.gameversion') == undefined){
                 document.getElementById('DownloadButton').innerHTML = "Install | v" + GameVersionLatest;
@@ -69,6 +76,12 @@ function GetLatestRelease(){
             
            
              
+             }
+             else{
+               loggerdownload.log("Getting games failed. Error: " + response.statusCode)
+               var jsonerror = JSON.parse(body);
+               loggerdownload.log(jsonerror.message)
+               OpenNoticeBar(" | Getting game version failed (" + response.statusCode + "). Try again later.")
              }
 
           })

@@ -10,14 +10,6 @@ const os = require('os');
 var popupS = require('popups');
 const opn = require('opn');
 
-let myNotification = new Notification('Title', {
-  body: 'Lorem Ipsum Dolor Sit Amet'
-})
-
-myNotification.onclick = () => {
-  console.log('Notification clicked')
-}
-
 
 //Program info log!
 loggercore.log("NODE.JS version: " + process.versions.node);

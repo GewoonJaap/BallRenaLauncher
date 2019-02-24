@@ -10,7 +10,10 @@ var rank;
 
 socket.on('connect', function(){
     loggerbackend.log("Connected to master server!"); 
-    
+    if(document.title == 'BallRena | Home')
+    {
+      CloseNoticeBar();
+    }
   });
 
   socket.on('UUID', function(data) {
@@ -40,10 +43,10 @@ socket.on('connect', function(){
 
   socket.on('disconnect', function(){
     loggerbackend.log("Connection lost! Trying to reconnect....");
-    popupS.alert({
-      title:   "Connectivity issue's!",
-      content: 'Connection to server lost!'
-  });
+    if(document.title == 'BallRena | Home')
+    {
+      OpenNoticeBar(" | Connection to the BallRena backend lost! Reconnecting...")
+    }
 });
 
 
