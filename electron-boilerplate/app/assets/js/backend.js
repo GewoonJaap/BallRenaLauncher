@@ -1,7 +1,7 @@
 var request = require('request');
 const loggerbackend = require('./assets/js/loggerutil.js')('%c[Backend]', 'color: #7289da; font-weight: bold');
 const fs = require('fs');
-var socket = io('https://ballrena-node-backend.herokuapp.com');
+var socket = io('https://backend.ballrena.ml/');
 var loginkey = store.get('unicorn.loginkey')
 GetUserStats();
 var rank;
@@ -16,10 +16,23 @@ socket.on('connect', function(){
     loggerbackend.log(data.message);
    var socketinfo = JSON.parse(data.message)
   })
+  socket.on('Version', function(data) {
+    loggerbackend.log(data.message);
+   var socketversion = JSON.parse(data.message);
+   if(document.title == 'BallRena | Home'){
+    GetLatestRelease();
+    loggerbackend.log("Getting latest game version: " + socketversion.NewGameVersion);
+   }
+   else{
+     loggerbackend.log("New game version availible! " + socketversion.NewGameVersion);
+   }
+
+  })
   socket.on('online', function(data) {
     loggerbackend.log(data.message);
     var socketonline = JSON.parse(data.message)
     loggerbackend.log("Online players:" + socketonline.OnlinePlayers);
+    store.set('game.online', socketonline.OnlinePlayers);
   })
 
   socket.on('disconnect', function(){
