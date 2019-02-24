@@ -6,6 +6,8 @@ var loginkey = store.get('unicorn.loginkey')
 GetUserStats();
 var rank;
 
+//Socket functions
+
 socket.on('connect', function(){
     loggerbackend.log("Connected to master server!");
   });
@@ -14,13 +16,18 @@ socket.on('connect', function(){
     loggerbackend.log(data.message);
    var socketinfo = JSON.parse(data.message)
   })
+  socket.on('online', function(data) {
+    loggerbackend.log(data.message);
+    var socketonline = JSON.parse(data.message)
+    loggerbackend.log("Online players:" + socketonline.OnlinePlayers);
+  })
 
   socket.on('disconnect', function(){
     loggerbackend.log("Connection lost! Trying to reconnect....");
 });
 
 
-//API
+//API functions
 
 function BacktoLogin(){
   storecore.delete('unicorn.username');
@@ -68,10 +75,12 @@ function GetUserStats(){
             loggerbackend.log("Saved..")
 
             //Get page
-            if(document.title = "BallRena | Home")
+            if(document.title == "BallRena | Account")
             {
-              loggerbackend.log("Home page")
-              document.getElementById('PlayerStats').innerHTML = "XP: " + json.exp + "<br> Role: "+ json.rank + "<br> Level: " + json.level;
+              loggerbackend.log("Account page")
+              document.getElementById('xp').innerHTML = "XP: " + json.exp;
+              document.getElementById('role').innerHTML = "Role: " + json.rank;
+              document.getElementById('level').innerHTML = "Level: " + json.level;
             }
 
           }

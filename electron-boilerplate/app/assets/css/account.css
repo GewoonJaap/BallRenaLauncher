@@ -79,6 +79,7 @@ li{
 
 .basicaccountinfo{
     background-color: rgb(28, 29, 31);
+    overflow: auto;
     border-radius: 10px;
     margin-top: 5%;
     width: 75%;
