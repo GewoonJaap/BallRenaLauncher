@@ -64,6 +64,7 @@ else if(banned = "false"){
     document.getElementById('emailadress').innerText = "Email: " + email;
     document.getElementById('username').innerText = "Username: " + username;
     document.getElementById('banned').innerText = "Banned: " + bannedvar;
+    document.getElementById('online').innerText = "Players online: " + store.get('game.online');
     document.getElementById('HWID').innerText = "HardwareID: " + store.get("pc.uuid");
     document.getElementById('GPU').innerText = "Graphics card: " + store.get('pc.gpu');
     if(store.get('game.version') == undefined){

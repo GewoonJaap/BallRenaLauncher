@@ -15,6 +15,7 @@ socket.on('connect', function(){
   socket.on('UUID', function(data) {
     loggerbackend.log(data.message);
    var socketinfo = JSON.parse(data.message)
+   store.set('game.online', socketinfo.Online);
   })
   socket.on('Version', function(data) {
     loggerbackend.log(data.message);
@@ -33,6 +34,9 @@ socket.on('connect', function(){
     var socketonline = JSON.parse(data.message)
     loggerbackend.log("Online players:" + socketonline.OnlinePlayers);
     store.set('game.online', socketonline.OnlinePlayers);
+    if(document.title == 'BallRena | Account'){
+      document.getElementById('online').innerHTML = "Players online: " + socketonline.OnlinePlayers;
+    }
   })
 
   socket.on('disconnect', function(){
