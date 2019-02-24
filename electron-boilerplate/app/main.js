@@ -5,6 +5,7 @@ const log = require('electron-log');
 const {app, BrowserWindow, remote} = require('electron');
 const isDev = require('electron-is-dev');
 var os = require('os');
+const opn = require('opn');
 
 
 // configure logging
@@ -85,6 +86,7 @@ autoUpdater.on('checking-for-update', () => {
 });
 autoUpdater.on('update-available', info => {
   if(process.platform == "darwin"){
+    opn('https://download.ballrena.ml/download');
     sendStatusToWindow('Download the update at: <a href="https://download.ballrena.ml/download">https://download.ballrena.ml/download</a>.');
   }
   else{
@@ -97,6 +99,8 @@ autoUpdater.on('update-not-available', info => {
 });
 autoUpdater.on('error', err => {
   if(process.platform == "darwin"){
+    opn('https://download.ballrena.ml/download');
+
     sendStatusToWindow('Download the update at: <a href="https://download.ballrena.ml/download">https://download.ballrena.ml/download</a>.<br>' + err.toString());
   }
   else{
@@ -105,6 +109,7 @@ autoUpdater.on('error', err => {
 });
 autoUpdater.on('download-progress', progressObj => {
   if(process.platform == "darwin"){
+    opn('https://download.ballrena.ml/download');
     sendStatusToWindow('Download the update at: <a href="https://download.ballrena.ml/download">https://download.ballrena.ml/download</a>.');
   }
   else{
@@ -122,6 +127,7 @@ autoUpdater.on('update-downloaded', info => {
   // In your application, you don't need to wait 500 ms.
   // You could call autoUpdater.quitAndInstall(); immediately
   if(process.platform == "darwin"){
+    opn('https://download.ballrena.ml/download');
     sendStatusToWindow('Download the update at: <a href="https://download.ballrena.ml/download">https://download.ballrena.ml/download</a>.');
   }
   else{
