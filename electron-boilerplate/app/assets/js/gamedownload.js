@@ -55,7 +55,7 @@ function GetLatestRelease(){
                   message: `BallRena is ready to get updated!`,
                   sound: false,
                   wait: true,
-                  icon: __dirname + './assets/img/avatar.png'
+                  icon: __dirname + './assets/img/BallRenaMiniLogo.png'
                 }, (err) => {
                   if (err) {
                     console.error('Snoretoast error: ', err);

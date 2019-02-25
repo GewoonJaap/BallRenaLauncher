@@ -19,18 +19,7 @@ loggerhome.log("Loaded Home.js");
 function OpenLink(url){
   opn(url);
 }
-notifier.notify({
-  appName: 'nl.ballrena.electronjslauncher',
-  title: 'Whatever',
-  message: `whatever`,
-  sound: false,
-  wait: true,
-  icon: __dirname + './assets/img/avatar.png'
-}, (err) => {
-  if (err) {
-    console.error('Snoretoast error: ', err);
-  }
-});
+
 
 //Open notice bar
 
@@ -123,13 +112,18 @@ child(executablePath, function(err, data) {
         store.set('game.installed', "true");
 
         //Notification
-        let myNotification = new Notification('BallRena updated', {
-          body: 'BallRena Game is updated to: ' + store.get('game.version')
-        })
-        
-        myNotification.onclick = () => {
-          console.log('Notification clicked')
-        }
+        notifier.notify({
+          appName: 'nl.ballrena.electronjslauncher',
+          title: 'BallRena Game',
+          message: `BallRena is up-to-date`,
+          sound: false,
+          wait: true,
+          icon: __dirname + './assets/img/BallRenaMiniLogo.png'
+        }, (err) => {
+          if (err) {
+            console.error('Snoretoast error: ', err);
+          }
+        });
         //Check for update
         GetLatestRelease();
       });
