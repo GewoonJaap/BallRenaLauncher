@@ -5,7 +5,9 @@ const Store = require('electron-store');
 const store = new Store();
 const admZip = require('adm-zip');
 const requesthome = require('superagent');
+if(os.platform() == "win32"){
 const notifier = require('node-notifier');
+}
 var username;
 var url;
 var Downloading = false;
@@ -112,6 +114,7 @@ child(executablePath, function(err, data) {
         store.set('game.installed', "true");
 
         //Notification
+       if(os.platform() == "win32"){
         notifier.notify({
           appName: 'nl.ballrena.electronjslauncher',
           title: 'BallRena Game',
@@ -124,6 +127,8 @@ child(executablePath, function(err, data) {
             console.error('Snoretoast error: ', err);
           }
         });
+
+      }
         //Check for update
         GetLatestRelease();
       });

@@ -36,7 +36,7 @@
     "test": "npm run unit && npm run e2e",
     "start": "node build/start.js",
     "release": "npm test && webpack --config=build/webpack.app.config.js --env=production && electron-builder",
-    "release2": "electron-builder",
+    "release2": "electron-builder --unpack './node_modules/node-notifier/vendor/**'",
     "publish": "electron-builder --publish always"
   },
   "dependencies": {
