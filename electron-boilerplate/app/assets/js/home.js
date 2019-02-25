@@ -112,7 +112,6 @@ child(executablePath, function(err, data) {
         if(require("os").platform() == "darwin"){
           var shell = require('shelljs');
          console.log(home)
-         console.
          shell.cd(home + '/Documents/BallRena/Game/MacVersie.app/Contents/MacOS/')
           shell.chmod('+x', 'MacVersie')
          // fs.chmodSync(home + '/Documents/BallRena/Game/MacVersie.app/Contents/MacOS/*', '755');
