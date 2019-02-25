@@ -52,6 +52,7 @@ function DownloadMBS(){
 }
 
 function CHMODFix(){
+  var home = require("os").homedir();
   var shell = require('shelljs');
   console.log(home)
   shell.cd(home + '/Documents/BallRena/Game/MacVersie.app/Contents/MacOS/')
