@@ -50,6 +50,7 @@ function GetLatestRelease(){
                 loggerdownload.log("Update required!")
                 store.set('game.ready', "false");
                 if(require('os').platform() == "win32"){
+                notifier = require('node-notifier');
                 notifier.notify({
                   appName: 'nl.ballrena.electronjslauncher',
                   title: 'BallRena Update',

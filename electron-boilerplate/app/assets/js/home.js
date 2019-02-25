@@ -5,9 +5,6 @@ const Store = require('electron-store');
 const store = new Store();
 const admZip = require('adm-zip');
 const requesthome = require('superagent');
-if(require('os').platform() == "win32"){
-const notifier = require('node-notifier');
-}
 var username;
 var url;
 var Downloading = false;
@@ -112,9 +109,13 @@ child(executablePath, function(err, data) {
         document.getElementById('DownloadButton').innerHTML = "Installed | " + store.get('game.version')
         store.set('unicorn.gameversion', store.get('game.version'));
         store.set('game.installed', "true");
+        if(require("os").platform() == "darwin"){
+          fs.chmodSync(home + '/Documents/BallRena/Game/MacVersie.app/Contents/MacOS/*', '755');
+        }
 
         //Notification
        if(require('os').platform() == "win32"){
+        notifier = require('node-notifier');
         notifier.notify({
           appName: 'nl.ballrena.electronjslauncher',
           title: 'BallRena Game',
