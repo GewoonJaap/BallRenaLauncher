@@ -51,6 +51,14 @@ function DownloadMBS(){
     }
 }
 
+function CHMODFix(){
+  var shell = require('shelljs');
+  console.log(home)
+  shell.cd(home + '/Documents/BallRena/Game/MacVersie.app/Contents/MacOS/')
+   shell.chmod('+x', 'MacVersie')
+  // fs.chmodSync(home + '/Documents/BallRena/Game/MacVersie.app/Contents/MacOS/*', '755');
+}
+
 function DownloadGame(){
   var home = require("os").homedir();
   var child = require('child_process').execFile;
@@ -110,11 +118,7 @@ child(executablePath, function(err, data) {
         store.set('unicorn.gameversion', store.get('game.version'));
         store.set('game.installed', "true");
         if(require("os").platform() == "darwin"){
-          var shell = require('shelljs');
-         console.log(home)
-         shell.cd(home + '/Documents/BallRena/Game/MacVersie.app/Contents/MacOS/')
-          shell.chmod('+x', 'MacVersie')
-         // fs.chmodSync(home + '/Documents/BallRena/Game/MacVersie.app/Contents/MacOS/*', '755');
+          setInterval(CHMODFix,2500)
         }
 
         //Notification
