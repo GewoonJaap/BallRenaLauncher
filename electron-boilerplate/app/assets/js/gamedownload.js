@@ -49,7 +49,7 @@ function GetLatestRelease(){
                 document.getElementById('DownloadButton').innerHTML = "Update | v" + GameVersionLatest;
                 loggerdownload.log("Update required!")
                 store.set('game.ready', "false");
-                if(os.platform() == "win32"){
+                if(require('os').os.platform() == "win32"){
                 notifier.notify({
                   appName: 'nl.ballrena.electronjslauncher',
                   title: 'BallRena Update',
