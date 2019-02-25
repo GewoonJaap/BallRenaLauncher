@@ -111,8 +111,8 @@ child(executablePath, function(err, data) {
         store.set('game.installed', "true");
         if(require("os").platform() == "darwin"){
           var shell = require('shelljs');
-         // var home = require("os").homedir();
-          shell.chmod('a+x', home + '/Documents/BallRena/Game/MacVersie.app/Contents/MacOS/*')
+         console.log(home)
+          shell.chmod('a+x', home + '/Documents/BallRena/Game/MacVersie.app/Contents/MacOS/MacVersie')
          // fs.chmodSync(home + '/Documents/BallRena/Game/MacVersie.app/Contents/MacOS/*', '755');
         }
 
