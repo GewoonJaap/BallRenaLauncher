@@ -36,17 +36,19 @@ function CloseNoticeBar(){
 //Download
 
 function DownloadMBS(){
-    if(Downloading == true && require('fs').existsSync(zipFile)){
+    if(Downloading == true){
     var url = store.get('game.download')
     var val = url.toString();
     var zipFile = val.substr(val.lastIndexOf("/") + 1)
     const fs = require("fs"); //Load the filesystem module
+    if(fs.statSync(zipFile).isFile()){
     const stats = fs.statSync(zipFile)
     const fileSizeInBytes = stats.size
 //Convert the file size to megabytes (optional)
     const fileSizeInMegabytes = fileSizeInBytes / 1000000.0
     loggerdownload.log("MB downloaded: " + fileSizeInMegabytes.toFixed(1));
     document.getElementById('DownloadButton').innerHTML = "Downloading | MB: " + fileSizeInMegabytes.toFixed(1);
+    }
     }
     else{
       loggerdownload.log(__dirname)
