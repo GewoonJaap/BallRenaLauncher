@@ -60,7 +60,7 @@ if(store.get('unicorn.email') !=undefined){
 if(banned != "false"){
     bannedvar = emoji.get('heavy_check_mark');
 }
-else if(banned = "false"){
+else if(banned == "false"){
     bannedvar = emoji.get('x');
 }
 //Set text
