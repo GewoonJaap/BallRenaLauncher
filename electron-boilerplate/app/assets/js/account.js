@@ -30,6 +30,10 @@ function UninstallGame(){
     if (err) console.error(err)
     else console.log('BallRena folder made');
     });
+    mkdirp(home+ '/Documents/BallRena/Updates', function (err) {
+        if (err) console.error(err)
+        else console.log('BallRena folder made');
+        });
     document.getElementById('gameinstalled').innerText = "Uninstalled"
 
 }

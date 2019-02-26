@@ -48,6 +48,11 @@ function DownloadMBS(){
     loggerdownload.log("MB downloaded: " + fileSizeInMegabytes.toFixed(1));
     document.getElementById('DownloadButton').innerHTML = "Downloading | MB: " + fileSizeInMegabytes.toFixed(1);
     }
+    else{
+      loggerdownload.log(__dirname)
+      loggerdownload.log("Cannot download. File exists? " + require('fs').existsSync(__dirname + zipFile))
+      document.getElementById('DownloadButton').innerHTML = "We are having trouble downloading. ;/"
+    }
     setInterval(DownloadMBS,500)
 }
 
