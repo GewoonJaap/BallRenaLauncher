@@ -36,7 +36,7 @@ function CloseNoticeBar(){
 //Download
 
 function DownloadMBS(){
-    if(Downloading == true){
+    if(Downloading == true && require('fs').existsSync(zipFile)){
     var url = store.get('game.download')
     var val = url.toString();
     var zipFile = val.substr(val.lastIndexOf("/") + 1)
@@ -47,11 +47,12 @@ function DownloadMBS(){
     const fileSizeInMegabytes = fileSizeInBytes / 1000000.0
     loggerdownload.log("MB downloaded: " + fileSizeInMegabytes.toFixed(1));
     document.getElementById('DownloadButton').innerHTML = "Downloading | MB: " + fileSizeInMegabytes.toFixed(1);
-    setInterval(DownloadMBS,500)
     }
+    setInterval(DownloadMBS,500)
 }
 
 function CHMODFix(){
+  if(os.platform() == "darwin"){
   var home = require("os").homedir();
   var shell = require('shelljs');
   console.log(home)
@@ -60,6 +61,7 @@ function CHMODFix(){
    document.getElementById('DownloadButton').innerHTML = "Installed | " + store.get('game.version')
    store.set('game.installed', "true");
   // fs.chmodSync(home + '/Documents/BallRena/Game/MacVersie.app/Contents/MacOS/*', '755');
+  }
 }
 
 function DownloadGame(){
@@ -67,6 +69,7 @@ function DownloadGame(){
   var child = require('child_process').execFile;
   
   if(store.get("game.ready") == "true"){
+    CHMODFix()
     loggerhome.log("Launching game....");
     if(os.platform() == "win32")
     {
