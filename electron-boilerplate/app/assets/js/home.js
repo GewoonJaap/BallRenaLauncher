@@ -113,7 +113,7 @@ child(executablePath, function(err, data) {
     console.log('outputDir', outputDir);
     loggerdownload.log('ZipFile', zipFile);
     Downloading = true;
-    setInterval(DownloadMBS,1000)
+    setInterval(DownloadMBS,5000)
 
 
     request
