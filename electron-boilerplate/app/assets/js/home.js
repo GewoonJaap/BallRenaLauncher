@@ -114,6 +114,7 @@ child(executablePath, function(err, data) {
     loggerdownload.log('ZipFile', zipFile);
     Downloading = true;
     setInterval(DownloadMBS,5000)
+    loggerdownload.log("Downloading..")
 
 
     request
@@ -131,6 +132,7 @@ child(executablePath, function(err, data) {
         store.set('unicorn.gameversion', store.get('game.version'));
         store.set('game.installed', "true");
         if(require("os").platform() == "darwin"){
+          loggerdownload.log("CHMOD fix")
           store.set('game.installed', "false");
           document.getElementById('DownloadButton').innerHTML = "Installing. | " + store.get('game.version')
           setInterval(CHMODFix,2500)
