@@ -37,24 +37,26 @@ function CloseNoticeBar(){
 
 function DownloadMBS(){
     if(Downloading == true){
+     var home = require("os").homedir();
     var url = store.get('game.download')
     var val = url.toString();
     var zipFile = val.substr(val.lastIndexOf("/") + 1)
     const fs = require("fs"); //Load the filesystem module
-    if(fs.statSync(zipFile).isFile()){
-    const stats = fs.statSync(zipFile)
+    if(fs.statSync(home + '/Documents/BallRena/Updates/' + zipFile).isFile()){
+    const stats = fs.statSync(home + '/Documents/BallRena/Updates/' + zipFile)
     const fileSizeInBytes = stats.size
 //Convert the file size to megabytes (optional)
     const fileSizeInMegabytes = fileSizeInBytes / 1000000.0
     loggerdownload.log("MB downloaded: " + fileSizeInMegabytes.toFixed(1));
     document.getElementById('DownloadButton').innerHTML = "Downloading | MB: " + fileSizeInMegabytes.toFixed(1);
     }
-    }
+    
     else{
       loggerdownload.log(__dirname)
-      loggerdownload.log("Cannot download. File exists? " + require('fs').existsSync(__dirname + zipFile))
+      loggerdownload.log("Cannot download. File exists? " + require('fs').existsSync(home + '/Documents/BallRena/Updates/' + zipFile))
       document.getElementById('DownloadButton').innerHTML = "We are having trouble downloading. ;/"
     }
+  }
     setInterval(DownloadMBS,500)
 }
 
@@ -122,12 +124,12 @@ child(executablePath, function(err, data) {
       .on('error', function(error) {
         loggerdownload.log(error);
       })
-      .pipe(fs.createWriteStream(zipFile))
+      .pipe(fs.createWriteStream(home + '/Documents/BallRena/Updates/' + zipFile))
       .on('finish', function() {
         document.getElementById('DownloadButton').innerHTML = "Installing..."
         loggerdownload.log('Installing..');
         Downloading = false;
-        fs.createReadStream(zipFile).pipe(unzip.Extract({ path: home + '/Documents/BallRena/Game' }));
+        fs.createReadStream(home + '/Documents/BallRena/Updates/' + zipFile).pipe(unzip.Extract({ path: home + '/Documents/BallRena/Game' }));
         document.getElementById('DownloadButton').innerHTML = "Installed | " + store.get('game.version')
         store.set('unicorn.gameversion', store.get('game.version'));
         store.set('game.installed', "true");
