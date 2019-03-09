@@ -104,7 +104,8 @@ child(executablePath, function(err, data) {
     
   }
   else{
-    document.getElementById('DownloadButton').innerHTML = "Downloading..."
+    document.getElementById('DownloadButton').innerHTML = "Downloading...";
+    var AdmZip = require('adm-zip');
     var home = require("os").homedir();
     var url = store.get('game.download')
     var val = url.toString();
@@ -133,7 +134,11 @@ child(executablePath, function(err, data) {
         document.getElementById('DownloadButton').innerHTML = "Installing..."
         loggerdownload.log('Installing..');
         Downloading = false;
-        fs.createReadStream(home + '/Documents/BallRena/Updates/' + zipFile).pipe(unzip.Extract({ path: home + '/Documents/BallRena/Game' }));
+        var zip = new AdmZip(home + '/Documents/BallRena/Updates/' + zipFile);
+        zip.extractAllTo(home + '/Documents/BallRena/Game', /*overwrite*/true);
+
+       // fs.createReadStream(home + '/Documents/BallRena/Updates/' + zipFile).pipe(unzip.Extract({ path: home + '/Documents/BallRena/Game' }));
+
         document.getElementById('DownloadButton').innerHTML = "Installed | " + store.get('game.version')
         store.set('unicorn.gameversion', store.get('game.version'));
         store.set('game.installed', "true");
