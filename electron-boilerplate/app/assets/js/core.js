@@ -9,6 +9,7 @@ const si = require('systeminformation');
 const os = require('os');
 var popupS = require('popups');
 const opn = require('opn');
+var emoji = require('node-emoji');
 
 //Program info log!
 loggercore.log("NODE.JS version: " + process.versions.node);

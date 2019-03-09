@@ -74,6 +74,10 @@ function CHMODFix(){
 }
 
 function DownloadGame(){
+  if(store.get('unicorn.banned') == "true"){
+    document.getElementById('DownloadButton').innerHTML = "Access Denied"
+  }
+  else{
   var home = require("os").homedir();
   var child = require('child_process').execFile;
   
@@ -161,5 +165,6 @@ child(executablePath, function(err, data) {
         GetLatestRelease();
       });
     }
+  }
 }
 

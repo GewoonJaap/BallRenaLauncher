@@ -105,6 +105,13 @@ function GetUserStats(){
               document.getElementById('role').innerHTML = "Role: " + json.rank;
               document.getElementById('level').innerHTML = "Level: " + json.level;
             }
+            if(document.title == "BallRena | Home")
+            {
+              loggerbackend.log("Home page")
+              if(json.banstatus == "true"){
+                OpenNoticeBar(" | Your account is banned! You can not play anymore " + emoji.get('hugging_face'))
+              }
+            }
 
           }
           else{

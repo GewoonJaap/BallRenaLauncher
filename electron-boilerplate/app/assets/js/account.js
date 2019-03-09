@@ -1,6 +1,5 @@
 const Store = require('electron-store');
 const store = new Store();
-var emoji = require('node-emoji');
 const loggeraccount = require('./assets/js/loggerutil.js')('%c[Account]', 'color: #7289da; font-weight: bold');
 const loggeruninstaller = require('./assets/js/loggerutil.js')('%c[Uninstaller]', 'color: #ff0000; font-weight: bold');
 var fsextra = require('fs-extra')
