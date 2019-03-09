@@ -36,16 +36,16 @@ function GetLatestRelease(){
             loggerdownload.log("Publisher: " + Publisher);
             loggerdownload.log("Patchnotes: " + PatchNotes);
             loggerdownload.log("Platform: " + os.platform());
-           // store.set('game.version', GameVersionLatest);
+           store.set('game.version', GameVersionLatest);
             document.getElementById('patchnotes').innerHTML = PatchNotes;
             document.getElementById('LatestVersion').innerText = "Patchnotes: v" + GameVersionLatest;
-            if(store.get('unicorn.gameversion') == store.get('game.version'))
+            if(store.get('unicorn.gameversion') == GameVersionLatest)
             {
                 document.getElementById('DownloadButton').innerHTML = "Play" + emoji.get('video_game')
                 loggerhome.log("Game is up-to-date!");
                 store.set('game.ready', "true");
             }
-            if(store.get('unicorn.gameversion') != undefined && store.get('unicorn.gameversion') != store.get('game.version')){
+            if(store.get('unicorn.gameversion') != undefined && store.get('unicorn.gameversion') !=  GameVersionLatest){
                 document.getElementById('DownloadButton').innerHTML = "Update | v" + GameVersionLatest;
                 loggerdownload.log("Update required!")
                 store.set('game.ready', "false");
