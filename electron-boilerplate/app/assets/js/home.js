@@ -92,8 +92,7 @@ function DownloadGame(){
       var executablePath = home + '/Documents/BallRena/Game/MacVersie.app/Contents/MacOS/MacVersie';
     }
       
-
-child(executablePath, function(err, data) {
+child(executablePath, [store.get('unicorn.loginkey')], function(err, data) {
     if(err){
        loggerhome.error(err);
        return;
