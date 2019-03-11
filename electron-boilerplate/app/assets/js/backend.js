@@ -35,6 +35,7 @@ socket.on('connect', function(){
   })
   socket.on('online', function(data) {
     var socketonline = JSON.parse(data.message)
+    loggerbackend.log("Players online: " + socketonline.OnlinePlayers)
     store.set('game.online', socketonline.OnlinePlayers);
     if(document.title == 'BallRena | Account'){
       document.getElementById('online').innerHTML = "Players online: " + socketonline.OnlinePlayers;

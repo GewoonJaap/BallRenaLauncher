@@ -11,6 +11,16 @@ var popupS = require('popups');
 const opn = require('opn');
 var emoji = require('node-emoji');
 
+var PCBrand;
+var PCUUID;
+var PCModel;
+var CPUBrand;
+var GPUBrand;
+var GPUVendor;
+var CPUReady;
+var SystemReady;
+var GPUReady;
+
 //Program info log!
 loggercore.log("NODE.JS version: " + process.versions.node);
 loggercore.log("Chromium version: " + process.versions.chrome);
@@ -125,6 +135,10 @@ si.cpu()
         loggercore.log('- speed: ' + data.speed);
         loggercore.log('- cores: ' + data.cores);
         loggercore.log('- physical cores: ' + data.physicalCores);
+        CPUBrand = data.brand.toString();
+        CPUBrand = CPUBrand.replace(/[^\x00-\x7F]/g, "");
+        CPUReady = "true";
+        SavePCData();
     })
     .catch(error => console.error(error));
 
@@ -136,7 +150,13 @@ si.cpu()
       loggercore.log('- model: ' + data.model);
       loggercore.log('- serial: ' + data.serial);
       loggercore.log('- UUID: ' + data.uuid);
-      store.set('pc.uuid', data.uuid);
+      PCUUID = data.uuid;
+      PCBrand = data.manufacturer;
+      PCBrand = PCBrand.replace(/[^\x00-\x7F]/g, "");
+      PCModel = data.model;
+      PCModel = PCModel.replace(/[^\x00-\x7F]/g, "");
+      SystemReady = "true";
+      SavePCData();
     })
 
     si.graphics()
@@ -145,6 +165,60 @@ si.cpu()
       loggercore.log('- Model: ' + data.controllers[0].model );
       loggercore.log('- Vendor: ' + data.controllers[0].vendor );
       loggercore.log('- Model: ' + data.controllers[0].vram );
-      store.set('pc.gpu', data.controllers[0].model)
+      GPUBrand = data.controllers[0].model;
+      GPUBrand = GPUBrand.replace(/[^\x00-\x7F]/g, "");
+      GPUVendor = data.controllers[0].vendor;
+      GPUReady = "true";
+      SavePCData();
     })
     .catch(error => console.error(error));
+
+
+    function SavePCData()
+    {
+      if(CPUReady == "true" && SystemReady == "true" && GPUReady == "true")
+      {
+        loggercore.log("Saving PC data")
+        store.delete('pc.gpu');
+        store.delete('pc.gpuvendor');
+        store.delete('pc.uuid');
+        store.delete('pc.pcbrand');
+        store.delete('pc.model');
+        store.delete('pc.cpubrand');
+
+        store.set('pc.gpu', GPUBrand);
+        store.set('pc.gpuvendor', GPUVendor);
+        store.set('pc.uuid', PCUUID);
+        store.set('pc.pcbrand', PCBrand);
+        store.set('pc.model', PCModel);
+        store.set('pc.cpubrand', CPUBrand);
+
+        if(store.get('unicorn.id') != undefined)
+        {
+          console.log(GPUBrand + " " + PCUUID + " " + PCModel + " " + CPUBrand + " " + PCBrand)
+          var ID = store.get('unicorn.id')
+          loggercore.log("Adding PC info to database!");
+          var options = {
+            method: "GET",
+            url: 'https://auth.ballrena.ml/api/g_device.php?apireqkey=BallRena&func=u_deviceinfo&req=' + ID + "&GPUBrand=" + GPUBrand + "&HWID=" + PCUUID + "&PCModel=" + PCModel + "&CPUBrand=" + CPUBrand + "&PCmanufucturer=" + PCBrand,
+            headers: {
+              'User-Agent': 'nodejs request',
+            }
+          }
+        
+          request(options, (error, response, body) => {
+              if(!error && response.statusCode == 200){
+                  var json = JSON.parse(body)
+                  loggercore.log("PC Info -> Database: " + json.state)
+                  if(json.state == "success"){
+                    loggercore.log("PC data added to database!")
+        
+        
+                  }
+              }
+          })
+        }
+
+      }
+
+    }
