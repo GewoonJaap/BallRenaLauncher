@@ -19,6 +19,18 @@ const store = new Store();
 //https://www.npmjs.com/package/node-emoji
 
 
+function OpenNoticeBarSocket(noticetext){
+    document.getElementById('noticetextdiv').style.height = '4vh';
+    document.getElementById('noticetextdiv').style.visibility = 'visible';
+    document.getElementById('noticetext').innerHTML = noticetext;
+  }
+  
+  function CloseNoticeBarSocket(){
+    document.getElementById('noticetextdiv').style.height = '0';
+    document.getElementById('noticetextdiv').style.visibility = 'hidden';
+  }
+
+
 
 socket.on('connect', function(){
   loggersocket.log("Connected to master server!");
@@ -84,7 +96,7 @@ function LoginBTN()
                   document.getElementById("submit classl").value = "Login" + emoji.get('heavy_check_mark');
                   loggersocket.log(json.loginreqkey);
                   loginkey = json.loginreqkey;
-                  SaveLoginkey();
+                  SaveLoginKey(loginkey)
                   loggersocket.log("Opening main menu....");
                   let win = new BrowserWindow({minWidth: 1280, minHeight: 720, width: 1280, height: 720, frame: false, titleBarStyle: 'default', webPreferences: {devTools: true }, backgroundColor: '#2e2c29' , title:"BallRena Launcher" })
                   loggersocket.log("Opening...");
@@ -94,9 +106,15 @@ function LoginBTN()
                   window.close();
               }
               else{
-                  loggersocket.warn("Login: " + json.login);
+                  loggersocket.warn("Login: " + json.state);
+                  if(json.reason != undefined)
+                  {
+                    loggersocket.debug("Login failed: " + json.reason);
+                  OpenNoticeBarSocket(" | Login failed! " + json.reason)
+                  }
                   delay(500);
                   document.getElementById("submit classl").value = "Login" + emoji.get('x');
+                  
               }
           }
       })
@@ -143,6 +161,11 @@ function LoginSaved()
               else{
                   loggersocket.warn("Login: " + json.login);
                   delay(500);
+                  if(json.reason != undefined)
+                  {
+                    loggersocket.debug("Login failed: " + json.reason);
+                    OpenNoticeBarSocket(" | Login failed! " + json.reason)
+                  }
                   document.getElementById("submit classl").value = "Login" + emoji.get('x');
               }
           }
@@ -200,7 +223,7 @@ function Register()
                   loggersocket.log(json.loginreqkey);
                 loginkey = json.loginreqkey;
                 store.set('unicorn.email', email);
-                SaveLoginKey();
+                SaveLoginKey(loginkey);
                 document.getElementById("submit classr").value = "Register" + emoji.get('heavy_check_mark');
                 loggersocket.log("Opening main menu....");
                 let win = new BrowserWindow({minWidth: 1280, minHeight: 720, width: 1280, height: 720, frame: false, titleBarStyle: 'default', backgroundColor: '#2e2c29' , title:"BallRena Launcher" })
@@ -212,6 +235,11 @@ function Register()
               }
               else{
                   loggersocket.debug("Login: " + json.login);
+                  if(json.reason != undefined)
+                  {
+                    loggersocket.debug("Login failed: " + json.reason);
+                    OpenNoticeBarSocket(" | Login failed! " + json.reason)
+                  }
                   document.getElementById("submit classr").value = "Register" + emoji.get('x');
               }
           }
