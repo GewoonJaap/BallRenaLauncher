@@ -1,4 +1,10 @@
 # BallRenaLauncher
+
+ElectronJS game launcher and updater, based on ElectronJS, HTML and CSS
+
+How to publish?
+
+
 Generate a GitHub access token by going to <https://github.com/settings/tokens/new>.  The access token should have the `repo` scope/permission.  Once you have the token, assign it to an environment variable
 
     On macOS/linux:
