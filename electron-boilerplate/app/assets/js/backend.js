@@ -105,6 +105,10 @@ function GetUserStats(){
               document.getElementById('xp').innerHTML = "XP: " + json.exp;
               document.getElementById('role').innerHTML = "Role: " + json.rank;
               document.getElementById('level').innerHTML = "Level: " + json.level;
+              document.getElementById('wins').innerHTML = "Wins: " + json.wins;
+              document.getElementById('loses').innerHTML = "Loses: " + json.loses;
+              document.getElementById('coins').innerHTML = "Coins: " + json.coins;
+              document.getElementById('PremCoins').innerHTML = "Premium Coins: " + json.premcoins;
             }
             if(document.title == "BallRena | Home")
             {

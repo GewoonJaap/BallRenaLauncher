@@ -87,6 +87,11 @@ li{
     color: white;
     font-size: 18px;
 }
+
+#accountinfodiv{
+    overflow: hidden;
+    height: 29%; 
+}
 #logout{
     color: red;
     font-weight: bold;
