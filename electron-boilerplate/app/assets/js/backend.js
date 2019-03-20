@@ -109,6 +109,7 @@ function GetUserStats(){
               document.getElementById('loses').innerHTML = "Loses: " + json.loses;
               document.getElementById('coins').innerHTML = "Coins: " + json.coins;
               document.getElementById('PremCoins').innerHTML = "Premium Coins: " + json.premcoins;
+              document.getElementById('created').innerHTML = "Account created on: " + json.creation;
             }
             if(document.title == "BallRena | Home")
             {
