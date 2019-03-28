@@ -2,6 +2,8 @@
 
 electron-boilerplate -> app; alle bestanden.
 
+# About
+
 ElectronJS game launcher and updater, based on ElectronJS, HTML and CSS
 
 How to publish?
