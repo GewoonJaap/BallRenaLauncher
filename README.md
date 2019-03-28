@@ -1,6 +1,6 @@
 # BallRenaLauncher
 
-electron-boilerplate -> app alle bestanden.
+electron-boilerplate -> app; alle bestanden.
 
 ElectronJS game launcher and updater, based on ElectronJS, HTML and CSS
 
